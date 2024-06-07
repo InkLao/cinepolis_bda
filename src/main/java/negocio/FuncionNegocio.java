@@ -11,17 +11,19 @@ import persistencia.FuncionDAO;
  *
  * @author eduar
  */
-public class FuncionNegocio {
-    private FuncionDAO funcionDAO;
+public class FuncionNegocio implements IFuncionNegocio{
+    private IFuncionDAO funcionDAO;
 
     public FuncionNegocio() {
         this.funcionDAO = new FuncionDAO();
     }
 
+    @Override
     public void registrarFuncion(Funcion funcion) {
         funcionDAO.guardar(funcion);
     }
 
+    @Override
     public Funcion buscarFuncionPorId(int id) {
         return funcionDAO.obtenerPorId(id);
     }
