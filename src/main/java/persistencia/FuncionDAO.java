@@ -4,7 +4,7 @@
  */
 package persistencia;
 
-import entidad.Compra;
+import entidad.Funcion;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,19 +12,19 @@ import java.util.List;
  *
  * @author eduar
  */
-public class CompraDAO implements ICompraDAO{
-    private List<Compra> compras = new ArrayList<>();
+public class FuncionDAO implements IFuncionDAO{
+    private List<Funcion> funciones = new ArrayList<>();
 
     @Override
-    public void guardar(Compra compra) {
-        compras.add(compra);
+    public void guardar(Funcion funcion) {
+        funciones.add(funcion);
     }
 
     @Override
-    public Compra obtenerPorId(int id) {
-        for (Compra compra : compras) {
-            if (compra.getIdCompra()== id) {
-                return compra;
+    public Funcion obtenerPorId(int id) {
+        for (Funcion funcion : funciones) {
+            if (funcion.getId() == id) {
+                return funcion;
             }
         }
         return null;
