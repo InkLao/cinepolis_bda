@@ -6,6 +6,7 @@ package negocio;
 
 import entidad.Funcion;
 import persistencia.FuncionDAO;
+import persistencia.IFuncionDAO;
 
 /**
  *
