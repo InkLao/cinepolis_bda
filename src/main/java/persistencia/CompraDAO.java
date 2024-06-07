@@ -12,13 +12,15 @@ import java.util.List;
  *
  * @author eduar
  */
-public class CompraDAO {
+public class CompraDAO implements ICompraDAO{
     private List<Compra> compras = new ArrayList<>();
 
+    @Override
     public void guardar(Compra compra) {
         compras.add(compra);
     }
 
+    @Override
     public Compra obtenerPorId(int id) {
         for (Compra compra : compras) {
             if (compra.getIdCompra()== id) {

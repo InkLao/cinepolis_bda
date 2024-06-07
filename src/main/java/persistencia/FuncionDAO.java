@@ -12,13 +12,15 @@ import java.util.List;
  *
  * @author eduar
  */
-public class FuncionDAO {
+public class FuncionDAO implements IFuncionDAO{
     private List<Funcion> funciones = new ArrayList<>();
 
+    @Override
     public void guardar(Funcion funcion) {
         funciones.add(funcion);
     }
 
+    @Override
     public Funcion obtenerPorId(int id) {
         for (Funcion funcion : funciones) {
             if (funcion.getId() == id) {

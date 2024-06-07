@@ -12,13 +12,15 @@ import java.util.List;
  *
  * @author eduar
  */
-public class ClienteDAO {
+public class ClienteDAO implements IClienteDAO{
     private List<Cliente> clientes = new ArrayList<>();
 
+    @Override
     public void guardar(Cliente cliente) {
         clientes.add(cliente);
     }
 
+    @Override
     public Cliente obtenerPorEmail(String email) {
         for (Cliente cliente : clientes) {
             if (cliente.getEmail().equals(email)) {
@@ -28,6 +30,7 @@ public class ClienteDAO {
         return null;
     }
 
+    @Override
     public Cliente obtenerPorId(int id) {
         for (Cliente cliente : clientes) {
             if (cliente.getIdCliente()== id) {
