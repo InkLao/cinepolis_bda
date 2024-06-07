@@ -5,6 +5,7 @@ package entidad;
  * @author eduar
  */
 public class Cliente {
+    private int idCliente;
     private String nombre;
     private String apellido;
     private String email;
@@ -20,6 +21,23 @@ public class Cliente {
         this.email = email;
         this.ciudad = ciudad;
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Cliente(int idCliente, String nombre, String apellido, String email, String ciudad, String fechaNacimiento) {
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.ciudad = ciudad;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getNombre() {
@@ -64,6 +82,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
 }
