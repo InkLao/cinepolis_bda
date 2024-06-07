@@ -7,6 +7,7 @@ package com.mycompany.cinepolis_bda;
 /**
  *
  * @author eduar
+ * Test commit
  */
 public class Cinepolis_bda {
 
