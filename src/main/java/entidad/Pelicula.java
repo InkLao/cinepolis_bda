@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entidad;
 
 /**
@@ -22,7 +19,15 @@ public class Pelicula {
     public Pelicula() {
     }
 
-    public Pelicula(int id, String titulo, String clasificacion, int duracion, String genero, String pais, String sinopsis, String trailer) {
+    public Pelicula(
+            int id, 
+            String titulo, 
+            String clasificacion, 
+            int duracion, 
+            String genero, 
+            String pais, 
+            String sinopsis, 
+            String trailer) {
         this.id = id;
         this.titulo = titulo;
         this.clasificacion = clasificacion;
@@ -33,7 +38,14 @@ public class Pelicula {
         this.trailer = trailer;
     }
 
-    public Pelicula(String titulo, String clasificacion, int duracion, String genero, String pais, String sinopsis, String trailer) {
+    public Pelicula(
+            String titulo, 
+            String clasificacion, 
+            int duracion, 
+            String genero, 
+            String pais, 
+            String sinopsis, 
+            String trailer) {
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.duracion = duracion;

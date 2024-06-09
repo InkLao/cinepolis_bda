@@ -15,7 +15,12 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String apellido, String email, String ciudad, String fechaNacimiento) {
+    public Cliente(
+            String nombre, 
+            String apellido, 
+            String email, 
+            String ciudad, 
+            String fechaNacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -23,7 +28,13 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cliente(int idCliente, String nombre, String apellido, String email, String ciudad, String fechaNacimiento) {
+    public Cliente(
+            int idCliente, 
+            String nombre, 
+            String apellido, 
+            String email, 
+            String ciudad, 
+            String fechaNacimiento) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;

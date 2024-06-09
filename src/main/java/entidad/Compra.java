@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entidad;
 
 import java.util.Date;
@@ -20,14 +17,23 @@ public class Compra {
     public Compra() {
     }
 
-    public Compra(Cliente cliente, String pelicula, Date fecha, int numeroAsientos) {
+    public Compra(
+            Cliente cliente, 
+            String pelicula, 
+            Date fecha, 
+            int numeroAsientos) {
         this.cliente = cliente;
         this.pelicula = pelicula;
         this.fecha = fecha;
         this.numeroAsientos = numeroAsientos;
     }
 
-    public Compra(int idCompra, Cliente cliente, String pelicula, Date fecha, int numeroAsientos) {
+    public Compra(
+            int idCompra, 
+            Cliente cliente, 
+            String pelicula, 
+            Date fecha, 
+            int numeroAsientos) {
         this.idCompra = idCompra;
         this.cliente = cliente;
         this.pelicula = pelicula;
