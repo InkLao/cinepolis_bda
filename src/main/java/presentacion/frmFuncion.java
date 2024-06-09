@@ -4,12 +4,15 @@
  */
 package presentacion;
 
+import persistencia.IClienteDAO;
+
 /**
  *
  * @author santi
  */
 public class frmFuncion extends javax.swing.JFrame {
 
+            IClienteDAO cliente = this.cliente;
     /**
      * Creates new form frmLogin
      */
@@ -34,6 +37,10 @@ public class frmFuncion extends javax.swing.JFrame {
         btnASucursal = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFuncion = new javax.swing.JTable();
+        btnFuncion = new javax.swing.JButton();
+        btnSucursal = new javax.swing.JButton();
+        btnPeliculas = new javax.swing.JButton();
+        btnSalas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,13 +79,22 @@ public class frmFuncion extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblFuncion);
 
+        btnFuncion.setText("Agregar Funcion");
+
+        btnSucursal.setText("Agregar Sucursal");
+
+        btnPeliculas.setText("Agregar Sucursal");
+
+        btnSalas.setText("Agregar Sucursal");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAtras))
+                .addComponent(btnAtras)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -91,7 +107,20 @@ public class frmFuncion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnASucursal))
                     .addComponent(btnGuardar)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnFuncion)
+                            .addComponent(btnSucursal))
+                        .addGap(27, 27, 27))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSalas)
+                            .addComponent(btnPeliculas))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,9 +130,17 @@ public class frmFuncion extends javax.swing.JFrame {
                     .addComponent(jcSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnACiudad)
-                    .addComponent(btnASucursal))
+                    .addComponent(btnASucursal)
+                    .addComponent(btnFuncion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSucursal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPeliculas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSalas)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
@@ -116,7 +153,8 @@ public class frmFuncion extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        frmLogin x = new frmLogin();
+        IClienteDAO cliente = this.cliente;        
+        frmLogin x = new frmLogin(cliente);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
@@ -182,7 +220,11 @@ public class frmFuncion extends javax.swing.JFrame {
     private javax.swing.JButton btnACiudad;
     private javax.swing.JButton btnASucursal;
     private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnFuncion;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnPeliculas;
+    private javax.swing.JButton btnSalas;
+    private javax.swing.JButton btnSucursal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcCiudad;
     private javax.swing.JComboBox<String> jcSucursal;

@@ -4,14 +4,23 @@
  */
 package persistencia;
 
+import dtos.registrarClienteDTO;
+import dtos.validarClienteDTO;
 import entidad.Cliente;
+import negocio.NegocioException;
 
 /**
  *
  * @author eduar
  */
 public interface IClienteDAO {
-    void guardar(Cliente cliente);
+    
+    void registrarCliente(registrarClienteDTO cliente) throws PersistenciaException;
+    
+    boolean validarCliente(validarClienteDTO cliente) throws PersistenciaException;
+    
     Cliente obtenerPorId(int id);
+    
     Cliente obtenerPorEmail(String email);
+    
 }
