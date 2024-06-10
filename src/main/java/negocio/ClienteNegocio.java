@@ -4,24 +4,46 @@
  */
 package negocio;
 
+import dtos.registrarClienteDTO;
+import dtos.validarClienteDTO;
 import entidad.Cliente;
+import java.util.List;
 import persistencia.ClienteDAO;
 import persistencia.IClienteDAO;
+import persistencia.PersistenciaException;
 
 /**
  *
  * @author eduar
  */
 public class ClienteNegocio implements IClienteNegocio{
+    
     private IClienteDAO clienteDAO;
 
-    public ClienteNegocio() {
-        this.clienteDAO = new ClienteDAO();
+    public ClienteNegocio(IClienteDAO Cliente) {
+        this.clienteDAO = Cliente;
     }
 
     @Override
-    public void registrarCliente(Cliente cliente) {
-        clienteDAO.guardar(cliente);
+    public void registrarCliente(registrarClienteDTO cliente) throws NegocioException{
+            try {
+            this.clienteDAO.registrarCliente(cliente);            
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }
+    
+    @Override
+    public boolean validarCliente(validarClienteDTO cliente) throws NegocioException{
+            try {
+            return this.clienteDAO.validarCliente(cliente);            
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
     }
 
     @Override

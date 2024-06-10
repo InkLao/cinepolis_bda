@@ -4,6 +4,8 @@
  */
 package negocio;
 
+import dtos.registrarClienteDTO;
+import dtos.validarClienteDTO;
 import entidad.Cliente;
 
 /**
@@ -11,7 +13,8 @@ import entidad.Cliente;
  * @author eduar
  */
 public interface IClienteNegocio {
-    void registrarCliente(Cliente cliente);
+    void registrarCliente(registrarClienteDTO cliente) throws NegocioException;
+    public boolean validarCliente(validarClienteDTO cliente) throws NegocioException;
     Cliente buscarClientePorId(int id);
     Cliente buscarClientePorEmail(String email);
 }
