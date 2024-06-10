@@ -4,17 +4,22 @@
  */
 package presentacion;
 
+import dtos.RegistroSucursalDTO;
+import javax.swing.JOptionPane;
+import negocio.ISucursalNegocio;
+import negocio.SucursalNegocio;
+
 /**
  *
  * @author eduar
  */
 public class frmRegistroSucursal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmRegistroCartelera
-     */
+    private ISucursalNegocio sucursalNegocio;
+
     public frmRegistroSucursal() {
         initComponents();
+        sucursalNegocio = new SucursalNegocio();
     }
 
     /**
@@ -26,10 +31,10 @@ public class frmRegistroSucursal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fldNombre = new javax.swing.JTextField();
+        fldDireccion = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
-        fldCorreo = new javax.swing.JTextField();
+        fldNombre = new javax.swing.JTextField();
         cmbCiudad = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -81,8 +86,8 @@ public class frmRegistroSucursal extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fldCorreo)
                             .addComponent(fldNombre)
+                            .addComponent(fldDireccion)
                             .addComponent(cmbCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
@@ -96,7 +101,7 @@ public class frmRegistroSucursal extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -105,7 +110,7 @@ public class frmRegistroSucursal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(fldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
@@ -117,18 +122,33 @@ public class frmRegistroSucursal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String nombre = fldNombre.getText().trim();
+        String ciudad = cmbCiudad.getSelectedItem().toString().trim();
+        String direccion = fldDireccion.getText().trim();
 
+        if (nombre.isEmpty() || ciudad.isEmpty() || direccion.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear DTO
+        RegistroSucursalDTO sucursalDTO = new RegistroSucursalDTO(nombre, ciudad, direccion);
+
+        // Guardar la sucursal a través de la lógica de negocio
+        sucursalNegocio.registrarSucursal(sucursalDTO);
+
+        JOptionPane.showMessageDialog(this, "Sucursal registrada: " + sucursalDTO);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-
+        dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cmbCiudad;
-    private javax.swing.JTextField fldCorreo;
+    private javax.swing.JTextField fldDireccion;
     private javax.swing.JTextField fldNombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

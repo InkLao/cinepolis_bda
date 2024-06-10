@@ -4,6 +4,7 @@
  */
 package negocio;
 
+import dtos.RegistroFuncionDTO;
 import entidad.Funcion;
 import persistencia.FuncionDAO;
 import persistencia.IFuncionDAO;
@@ -27,5 +28,16 @@ public class FuncionNegocio implements IFuncionNegocio{
     @Override
     public Funcion buscarFuncionPorId(int id) {
         return funcionDAO.obtenerPorId(id);
+    }
+    
+    @Override
+    public void registrarFuncion(RegistroFuncionDTO funcionDTO) {
+        Funcion funcion = new Funcion(
+                funcionDTO.getPelicula(),
+                funcionDTO.getHora(),
+                funcionDTO.getSala(),
+                funcionDTO.getDisponibilidad()
+        );
+        funcionDAO.guardar(funcion);
     }
 }

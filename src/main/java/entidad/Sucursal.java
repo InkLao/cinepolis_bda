@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dtos;
+package entidad;
 
 /**
  *
  * @author eduar
  */
-public class RegistroSucursalDTO {
+public class Sucursal {
     private String nombre;
     private String ciudad;
     private String direccion;
 
-    public RegistroSucursalDTO(String nombre, String ciudad, String direccion) {
+    public Sucursal(String nombre, String ciudad, String direccion) {
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.direccion = direccion;
@@ -45,7 +45,7 @@ public class RegistroSucursalDTO {
 
     @Override
     public String toString() {
-        return "DTORegistroSucursal{" +
+        return "Sucursal{" +
                 "nombre='" + nombre + '\'' +
                 ", ciudad='" + ciudad + '\'' +
                 ", direccion='" + direccion + '\'' +

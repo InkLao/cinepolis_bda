@@ -4,40 +4,65 @@
  */
 package dtos;
 
+import entidad.Pelicula;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author eduar
  */
 public class RegistroFuncionDTO {
-    private String horario;
-    private String fecha;
+    private Pelicula pelicula;
+    private LocalDateTime hora;
+    private String sala;
+    private int disponibilidad;
 
-    public RegistroFuncionDTO(String horario, String fecha) {
-        this.horario = horario;
-        this.fecha = fecha;
+    public RegistroFuncionDTO(Pelicula pelicula, LocalDateTime hora, String sala, int disponibilidad) {
+        this.pelicula = pelicula;
+        this.hora = hora;
+        this.sala = sala;
+        this.disponibilidad = disponibilidad;
     }
 
-    public String getHorario() {
-        return horario;
+    public Pelicula getPelicula() {
+        return pelicula;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
 
-    public String getFecha() {
-        return fecha;
+    public LocalDateTime getHora() {
+        return hora;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setHora(LocalDateTime hora) {
+        this.hora = hora;
+    }
+
+    public String getSala() {
+        return sala;
+    }
+
+    public void setSala(String sala) {
+        this.sala = sala;
+    }
+
+    public int getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(int disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 
     @Override
     public String toString() {
         return "DTORegistroFuncion{" +
-                "horario='" + horario + '\'' +
-                ", fecha='" + fecha + '\'' +
+                "pelicula='" + pelicula + '\'' +
+                ", hora='" + hora + '\'' +
+                ", sala='" + sala + '\'' +
+                ", disponibilidad=" + disponibilidad +
                 '}';
     }
 }

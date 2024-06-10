@@ -38,14 +38,20 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel6" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel6" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmbCiudad" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="fldFecha" min="-2" pref="147" max="-2" attributes="0"/>
+                          <Component id="cmbPelicula" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                          <Component id="fldHora" min="-2" pref="147" max="-2" attributes="0"/>
+                          <Component id="fldSala" min="-2" pref="147" max="-2" attributes="0"/>
+                          <Component id="fldDisponibilidad" min="-2" pref="147" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -60,15 +66,25 @@
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cmbCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbPelicula" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="fldFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fldHora" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="80" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fldSala" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fldDisponibilidad" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAtras" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -103,30 +119,41 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtrasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cmbCiudad">
+    <Component class="javax.swing.JComboBox" name="cmbPelicula">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Pelicula&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Horario"/>
+        <Property name="text" type="java.lang.String" value="Pelicula"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="fldFecha">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="YYYY-MM-DD"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="fldHora">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hora de la funci&#xf3;n"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sala"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="fldSala">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Disponibilidad"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="fldDisponibilidad">
     </Component>
   </SubComponents>
 </Form>

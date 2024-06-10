@@ -4,15 +4,12 @@
  */
 package negocio;
 
-import dtos.RegistroFuncionDTO;
-import entidad.Funcion;
+import dtos.RegistroSucursalDTO;
 
 /**
  *
  * @author eduar
  */
-public interface IFuncionNegocio {
-    void registrarFuncion(Funcion funcion);
-    void registrarFuncion(RegistroFuncionDTO funcionDTO);
-    Funcion buscarFuncionPorId(int id);
+public interface ISucursalNegocio {
+    void registrarSucursal(RegistroSucursalDTO sucursalDTO);
 }
