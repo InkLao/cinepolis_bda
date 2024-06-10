@@ -4,7 +4,9 @@
  */
 package presentacion;
 
+import negocio.ICiudadNegocio;
 import persistencia.ClienteDAO;
+import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
 
 /**
@@ -14,11 +16,13 @@ import persistencia.IClienteDAO;
 public class frmLogin extends javax.swing.JFrame {
 
     private IClienteDAO cliente;
+    private ICiudadNegocio ciudad;
     /**
      * Creates new form frmLogin
      */
-    public frmLogin(IClienteDAO cliente) {
+    public frmLogin(IClienteDAO cliente, ICiudadNegocio ciudad) {
         this.cliente = cliente;
+        this.ciudad = ciudad;
         initComponents();
     }
 
@@ -80,7 +84,8 @@ public class frmLogin extends javax.swing.JFrame {
     private void btnIniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesiónActionPerformed
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;
-        frmIniciarSesion x = new frmIniciarSesion(cliente);
+        ICiudadNegocio ciudad = this.ciudad;
+        frmIniciarSesion x = new frmIniciarSesion(cliente, ciudad);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnIniciarSesiónActionPerformed
@@ -88,7 +93,8 @@ public class frmLogin extends javax.swing.JFrame {
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;
-        frmRegistro x = new frmRegistro(cliente);
+        ICiudadNegocio ciudad = this.ciudad;
+        frmRegistro x = new frmRegistro(cliente, ciudad);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed

@@ -4,6 +4,13 @@
  */
 package presentacion;
 
+import dtos.ciudadDTO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import negocio.ICiudadNegocio;
+import negocio.NegocioException;
+import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
 
 /**
@@ -12,13 +19,38 @@ import persistencia.IClienteDAO;
  */
 public class frmFuncion extends javax.swing.JFrame {
 
-            IClienteDAO cliente = this.cliente;
+    IClienteDAO cliente = this.cliente;
+    ICiudadNegocio ciudad = this.ciudad;
     /**
      * Creates new form frmLogin
      */
-    public frmFuncion() {
+    public frmFuncion(ICiudadNegocio ciudadNegocio) {
+        this.ciudad = ciudadNegocio;
         initComponents();
+        llenarBoxCiudades(buscarCiudadTabla());
     }
+    
+    private List<ciudadDTO> buscarCiudadTabla() {
+        List<ciudadDTO> ciudadLista = null;
+        try {
+            
+            ciudadLista = this.ciudad.buscarCiudadTabla();
+
+
+        } catch (NegocioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return ciudadLista;
+    }  
+    
+    private void llenarBoxCiudades(List<ciudadDTO> ciudadLista) {
+        int i = 0;
+        while (ciudadLista.size() > i) {
+            boxCiudad.addItem(ciudadLista.get(i).getNombre());
+            i++;
+        }
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,8 +63,8 @@ public class frmFuncion extends javax.swing.JFrame {
 
         btnGuardar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
-        jcCiudad = new javax.swing.JComboBox<>();
-        jcSucursal = new javax.swing.JComboBox<>();
+        boxCiudad = new javax.swing.JComboBox<>();
+        boxSucursal = new javax.swing.JComboBox<>();
         btnACiudad = new javax.swing.JButton();
         btnASucursal = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -58,9 +90,13 @@ public class frmFuncion extends javax.swing.JFrame {
             }
         });
 
-        jcCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCiudadActionPerformed(evt);
+            }
+        });
 
-        jcSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnACiudad.setText("Aceptar");
 
@@ -83,9 +119,9 @@ public class frmFuncion extends javax.swing.JFrame {
 
         btnSucursal.setText("Agregar Sucursal");
 
-        btnPeliculas.setText("Agregar Sucursal");
+        btnPeliculas.setText("Agregar Películas");
 
-        btnSalas.setText("Agregar Sucursal");
+        btnSalas.setText("Agregar Salas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,11 +135,11 @@ public class frmFuncion extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jcCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnACiudad)
                         .addGap(354, 354, 354)
-                        .addComponent(jcSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnASucursal))
                     .addComponent(btnGuardar)
@@ -117,9 +153,9 @@ public class frmFuncion extends javax.swing.JFrame {
                         .addGap(27, 27, 27))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSalas)
-                            .addComponent(btnPeliculas))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnPeliculas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSalas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -127,8 +163,8 @@ public class frmFuncion extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnACiudad)
                     .addComponent(btnASucursal)
                     .addComponent(btnFuncion))
@@ -154,7 +190,8 @@ public class frmFuncion extends javax.swing.JFrame {
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;        
-        frmLogin x = new frmLogin(cliente);
+        ICiudadNegocio ciudad = this.ciudad;
+        frmLogin x = new frmLogin(cliente, ciudad);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
@@ -166,57 +203,15 @@ public class frmFuncion extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmFuncion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+    private void boxCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCiudadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxCiudadActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmFuncion().setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxCiudad;
+    private javax.swing.JComboBox<String> boxSucursal;
     private javax.swing.JButton btnACiudad;
     private javax.swing.JButton btnASucursal;
     private javax.swing.JButton btnAtras;
@@ -226,8 +221,6 @@ public class frmFuncion extends javax.swing.JFrame {
     private javax.swing.JButton btnSalas;
     private javax.swing.JButton btnSucursal;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcCiudad;
-    private javax.swing.JComboBox<String> jcSucursal;
     private javax.swing.JTable tblFuncion;
     // End of variables declaration//GEN-END:variables
 }

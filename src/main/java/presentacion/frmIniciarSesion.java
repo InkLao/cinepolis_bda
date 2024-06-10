@@ -8,7 +8,9 @@ import dtos.validarClienteDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import negocio.ICiudadNegocio;
 import persistencia.ClienteDAO;
+import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
 import persistencia.PersistenciaException;
 
@@ -19,11 +21,13 @@ import persistencia.PersistenciaException;
 public class frmIniciarSesion extends javax.swing.JFrame {
 
     IClienteDAO cliente = this.cliente;    
+    ICiudadNegocio ciudad = this.ciudad;
     /**
      * Creates new form frmLogin
      */
-    public frmIniciarSesion(IClienteDAO cliente) {
+    public frmIniciarSesion(IClienteDAO cliente, ICiudadNegocio ciudad) {
         this.cliente = cliente;
+        this.ciudad = ciudad;
         initComponents();
     }
 
@@ -117,7 +121,8 @@ public class frmIniciarSesion extends javax.swing.JFrame {
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;
-        frmLogin x = new frmLogin(cliente);
+        ICiudadNegocio ciudad = this.ciudad;
+        frmLogin x = new frmLogin(cliente, ciudad);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
@@ -125,6 +130,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         
+        ICiudadNegocio ciudad = this.ciudad;
         String val1 = fldCorreo.getText();
         String val2 = fldContraseña.getText(); 
         validarClienteDTO clienteAV = new validarClienteDTO(val1, val2);        
@@ -132,7 +138,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
             if (validarCliente(clienteAV) == true){
                 
                 JOptionPane.showMessageDialog(this, "Sesión Iniciada");
-                frmFuncion x = new frmFuncion();
+                frmFuncion x = new frmFuncion(ciudad);
                 x.setVisible(true);
                 setVisible(false);
             } else JOptionPane.showMessageDialog(this, "Datos de inicio de sesión inexistentes");        

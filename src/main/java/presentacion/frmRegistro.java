@@ -12,8 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import negocio.ICiudadNegocio;
 import negocio.NegocioException;
 import persistencia.ClienteDAO;
+import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
 import persistencia.PersistenciaException;
 
@@ -23,13 +25,15 @@ import persistencia.PersistenciaException;
  */
 public class frmRegistro extends javax.swing.JFrame {
     
-    private IClienteDAO cliente;
+    IClienteDAO cliente;
+    ICiudadNegocio ciudad;
 
     /**
      * Creates new form frmLogin
      */
-    public frmRegistro(IClienteDAO cliente) {
+    public frmRegistro(IClienteDAO cliente, ICiudadNegocio ciudad) {
         this.cliente = cliente;
+        this.ciudad = ciudad;
         initComponents();
     }
 
@@ -187,7 +191,8 @@ public class frmRegistro extends javax.swing.JFrame {
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;
-        frmLogin x = new frmLogin(cliente);
+        ICiudadNegocio ciudad = this.ciudad;
+        frmLogin x = new frmLogin(cliente, ciudad);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed

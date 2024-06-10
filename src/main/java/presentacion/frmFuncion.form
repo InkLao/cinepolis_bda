@@ -32,11 +32,11 @@
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jcCiudad" min="-2" max="-2" attributes="0"/>
+                      <Component id="boxCiudad" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnACiudad" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="354" max="-2" attributes="0"/>
-                      <Component id="jcSucursal" min="-2" max="-2" attributes="0"/>
+                      <Component id="boxSucursal" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnASucursal" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -54,9 +54,9 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnSalas" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnPeliculas" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnPeliculas" max="32767" attributes="0"/>
+                          <Component id="btnSalas" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -69,8 +69,8 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jcSucursal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="boxSucursal" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="boxCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnACiudad" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnASucursal" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnFuncion" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -113,22 +113,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtrasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jcCiudad">
+    <Component class="javax.swing.JComboBox" name="boxCiudad">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boxCiudadActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jcSucursal">
+    <Component class="javax.swing.JComboBox" name="boxSucursal">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -186,12 +184,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPeliculas">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Agregar Sucursal"/>
+        <Property name="text" type="java.lang.String" value="Agregar Pel&#xed;culas"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSalas">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Agregar Sucursal"/>
+        <Property name="text" type="java.lang.String" value="Agregar Salas"/>
       </Properties>
     </Component>
   </SubComponents>

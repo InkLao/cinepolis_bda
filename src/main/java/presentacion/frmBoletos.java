@@ -4,12 +4,15 @@
  */
 package presentacion;
 
+import negocio.ICiudadNegocio;
+
 /**
  *
  * @author santi
  */
 public class frmBoletos extends javax.swing.JFrame {
 
+     ICiudadNegocio ciudad = this.ciudad;
     /**
      * Creates new form frmLogin
      */
@@ -100,7 +103,8 @@ public class frmBoletos extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        frmFuncion x = new frmFuncion();
+        ICiudadNegocio ciudad = this.ciudad;
+        frmFuncion x = new frmFuncion(ciudad);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
