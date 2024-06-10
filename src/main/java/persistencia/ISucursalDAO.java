@@ -4,14 +4,12 @@
  */
 package persistencia;
 
-import entidad.Pelicula;
+import entidad.Sucursal;
 
 /**
  *
  * @author eduar
  */
-public interface IPeliculaDAO {
-    void guardar(Pelicula pelicula);
-    Pelicula obtenerPorId(int id);
-    Pelicula obtenerPorTitulo(String titulo);
+public interface ISucursalDAO {
+    void guardar(Sucursal sucursal);
 }

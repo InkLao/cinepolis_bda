@@ -2,16 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package persistencia;
+package negocio;
 
-import entidad.Pelicula;
+import dtos.RegistroSalaDTO;
 
 /**
  *
  * @author eduar
  */
-public interface IPeliculaDAO {
-    void guardar(Pelicula pelicula);
-    Pelicula obtenerPorId(int id);
-    Pelicula obtenerPorTitulo(String titulo);
+public interface ISalaNegocio {
+    void registrarSala(RegistroSalaDTO salaDTO);
 }

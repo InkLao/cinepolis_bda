@@ -13,7 +13,6 @@ public class PeliculaDTO {
     private String titulo;
     private String clasificacion;
     private int duracion;
-    private String genero;
     private String pais;
     private String sinopsis;
     private String trailer;
@@ -21,22 +20,20 @@ public class PeliculaDTO {
     public PeliculaDTO() {
     }
 
-    public PeliculaDTO(String titulo, String clasificacion, int duracion, String genero, String pais, String sinopsis, String trailer) {
+    public PeliculaDTO(String titulo, String clasificacion, int duracion, String pais, String sinopsis, String trailer) {
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
-        this.genero = genero;
         this.pais = pais;
         this.sinopsis = sinopsis;
         this.trailer = trailer;
     }
 
-    public PeliculaDTO(int id, String titulo, String clasificacion, int duracion, String genero, String pais, String sinopsis, String trailer) {
+    public PeliculaDTO(int id, String titulo, String clasificacion, int duracion, String pais, String sinopsis, String trailer) {
         this.id = id;
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
-        this.genero = genero;
         this.pais = pais;
         this.sinopsis = sinopsis;
         this.trailer = trailer;
@@ -72,14 +69,6 @@ public class PeliculaDTO {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
     }
 
     public String getPais() {

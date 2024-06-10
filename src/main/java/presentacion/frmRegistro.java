@@ -138,9 +138,6 @@ public class frmRegistro extends javax.swing.JFrame {
         cmbCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cmbCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 327, 147, -1));
 
-        jlLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utilerias/Cinépolis (1).png"))); // NOI18N
-        getContentPane().add(jlLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 420, 100));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 

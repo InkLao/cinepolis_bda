@@ -4,6 +4,7 @@
  */
 package negocio;
 
+import dtos.RegistroFuncionDTO;
 import entidad.Funcion;
 
 /**
@@ -12,5 +13,6 @@ import entidad.Funcion;
  */
 public interface IFuncionNegocio {
     void registrarFuncion(Funcion funcion);
+    void registrarFuncion(RegistroFuncionDTO funcionDTO);
     Funcion buscarFuncionPorId(int id);
 }

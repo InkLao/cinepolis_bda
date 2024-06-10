@@ -1,6 +1,7 @@
 
 package entidad;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -10,24 +11,24 @@ import java.util.Date;
 public class Funcion {
     private int id;
     private Pelicula pelicula;
-    private Date fecha;
+    private LocalDateTime hora;
     private String sala;
     private int asientosDisponibles;
 
     public Funcion() {
     }
 
-    public Funcion(int id, Pelicula pelicula, Date fecha, String sala, int asientosDisponibles) {
+    public Funcion(int id, Pelicula pelicula, LocalDateTime hora, String sala, int asientosDisponibles) {
         this.id = id;
         this.pelicula = pelicula;
-        this.fecha = fecha;
+        this.hora = hora;
         this.sala = sala;
         this.asientosDisponibles = asientosDisponibles;
     }
 
-    public Funcion(Pelicula pelicula, Date fecha, String sala, int asientosDisponibles) {
+    public Funcion(Pelicula pelicula, LocalDateTime hora, String sala, int asientosDisponibles) {
         this.pelicula = pelicula;
-        this.fecha = fecha;
+        this.hora = hora;
         this.sala = sala;
         this.asientosDisponibles = asientosDisponibles;
     }
@@ -48,12 +49,12 @@ public class Funcion {
         this.pelicula = pelicula;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public LocalDateTime getHora() {
+        return hora;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setHora(LocalDateTime fecha) {
+        this.hora = fecha;
     }
 
     public String getSala() {
@@ -77,7 +78,7 @@ public class Funcion {
         return "Funcion{" +
                 "id=" + id +
                 ", pelicula=" + pelicula +
-                ", fecha=" + fecha +
+                ", hora=" + hora +
                 ", sala='" + sala + '\'' +
                 ", asientosDisponibles=" + asientosDisponibles +
                 '}';

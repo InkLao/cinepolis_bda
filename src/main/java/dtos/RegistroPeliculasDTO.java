@@ -1,13 +1,15 @@
-
-package entidad;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package dtos;
 
 /**
  *
  * @author eduar
  */
-public class Pelicula {
+public class RegistroPeliculasDTO {
 
-    private int id;
     private String titulo;
     private String clasificacion;
     private int duracion;
@@ -15,11 +17,8 @@ public class Pelicula {
     private String sinopsis;
     private String trailer;
 
-    public Pelicula() {
-    }
-
-    public Pelicula(int id, String titulo, String clasificacion, int duracion, String pais, String sinopsis, String trailer) {
-        this.id = id;
+    // Constructor
+    public RegistroPeliculasDTO(String titulo, String clasificacion, int duracion, String pais, String sinopsis, String trailer) {
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
@@ -27,30 +26,7 @@ public class Pelicula {
         this.sinopsis = sinopsis;
         this.trailer = trailer;
     }
-
-    public Pelicula(
-            String titulo, 
-            String clasificacion, 
-            int duracion, 
-            String pais, 
-            String sinopsis, 
-            String trailer) {
-        this.titulo = titulo;
-        this.clasificacion = clasificacion;
-        this.duracion = duracion;
-        this.pais = pais;
-        this.sinopsis = sinopsis;
-        this.trailer = trailer;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
     public String getTitulo() {
         return titulo;
     }
@@ -101,14 +77,13 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "Pelicula{"
-                + "id=" + id
-                + ", titulo='" + titulo + '\''
-                + ", clasificacion='" + clasificacion + '\''
-                + ", duracion=" + duracion
-                + ", pais='" + pais + '\''
-                + ", sinopsis='" + sinopsis + '\''
-                + ", trailer='" + trailer + '\''
-                + '}';
+        return "DTORegistroPeliculas{" +
+                ", titulo='" + titulo + '\'' +
+                ", clasificacion='" + clasificacion + '\'' +
+                ", duracion=" + duracion +
+                ", pais='" + pais + '\'' +
+                ", sinopsis='" + sinopsis + '\'' +
+                ", trailer='" + trailer + '\'' +
+                '}';
     }
 }
