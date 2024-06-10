@@ -4,17 +4,22 @@
  */
 package presentacion;
 
+import dtos.RegistroSalaDTO;
+import javax.swing.JOptionPane;
+import negocio.ISalaNegocio;
+import negocio.SalaNegocio;
+
 /**
  *
  * @author eduar
  */
 public class frmRegistroSala extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmRegistroSala
-     */
+    private ISalaNegocio salaNegocio;
+
     public frmRegistroSala() {
         initComponents();
+        salaNegocio = new SalaNegocio();
     }
 
     /**
@@ -26,13 +31,13 @@ public class frmRegistroSala extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fldCorreo = new javax.swing.JTextField();
+        fldNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
-        fldCorreo1 = new javax.swing.JTextField();
+        fldCapacidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,8 +82,8 @@ public class frmRegistroSala extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fldCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(fldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fldCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -88,12 +93,12 @@ public class frmRegistroSala extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fldCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(fldCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fldCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
@@ -105,53 +110,42 @@ public class frmRegistroSala extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+         String nombre = fldNombre.getText().trim();
+        String capacidadStr = fldCapacidad.getText().trim();
 
+        if (nombre.isEmpty() || capacidadStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int capacidad;
+        try {
+            capacidad = Integer.parseInt(capacidadStr);
+            if (capacidad <= 0) {
+                JOptionPane.showMessageDialog(this, "La capacidad debe ser un número positivo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La capacidad debe ser un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        RegistroSalaDTO salaDTO = new RegistroSalaDTO(nombre, capacidad);
+
+        salaNegocio.registrarSala(salaDTO);
+
+        JOptionPane.showMessageDialog(this, "Sala registrada: " + salaDTO);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-
+        dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmRegistroSala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmRegistroSala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmRegistroSala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmRegistroSala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmRegistroSala().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JTextField fldCorreo;
-    private javax.swing.JTextField fldCorreo1;
+    private javax.swing.JTextField fldCapacidad;
+    private javax.swing.JTextField fldNombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
