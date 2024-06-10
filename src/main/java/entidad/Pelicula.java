@@ -11,7 +11,6 @@ public class Pelicula {
     private String titulo;
     private String clasificacion;
     private int duracion;
-    private String genero;
     private String pais;
     private String sinopsis;
     private String trailer;
@@ -19,20 +18,11 @@ public class Pelicula {
     public Pelicula() {
     }
 
-    public Pelicula(
-            int id, 
-            String titulo, 
-            String clasificacion, 
-            int duracion, 
-            String genero, 
-            String pais, 
-            String sinopsis, 
-            String trailer) {
+    public Pelicula(int id, String titulo, String clasificacion, int duracion, String pais, String sinopsis, String trailer) {
         this.id = id;
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
-        this.genero = genero;
         this.pais = pais;
         this.sinopsis = sinopsis;
         this.trailer = trailer;
@@ -42,14 +32,12 @@ public class Pelicula {
             String titulo, 
             String clasificacion, 
             int duracion, 
-            String genero, 
             String pais, 
             String sinopsis, 
             String trailer) {
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
-        this.genero = genero;
         this.pais = pais;
         this.sinopsis = sinopsis;
         this.trailer = trailer;
@@ -87,14 +75,6 @@ public class Pelicula {
         this.duracion = duracion;
     }
 
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
     public String getPais() {
         return pais;
     }
@@ -126,7 +106,6 @@ public class Pelicula {
                 + ", titulo='" + titulo + '\''
                 + ", clasificacion='" + clasificacion + '\''
                 + ", duracion=" + duracion
-                + ", genero='" + genero + '\''
                 + ", pais='" + pais + '\''
                 + ", sinopsis='" + sinopsis + '\''
                 + ", trailer='" + trailer + '\''

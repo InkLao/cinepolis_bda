@@ -9,35 +9,24 @@ package dtos;
  * @author eduar
  */
 public class RegistroPeliculasDTO {
-    private int id;
+
     private String titulo;
     private String clasificacion;
     private int duracion;
-    private String genero;
     private String pais;
     private String sinopsis;
     private String trailer;
 
     // Constructor
-    public RegistroPeliculasDTO(int id, String titulo, String clasificacion, int duracion, String genero, String pais, String sinopsis, String trailer) {
-        this.id = id;
+    public RegistroPeliculasDTO(String titulo, String clasificacion, int duracion, String pais, String sinopsis, String trailer) {
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
-        this.genero = genero;
         this.pais = pais;
         this.sinopsis = sinopsis;
         this.trailer = trailer;
     }
     
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getTitulo() {
         return titulo;
     }
@@ -60,14 +49,6 @@ public class RegistroPeliculasDTO {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
     }
 
     public String getPais() {
@@ -97,11 +78,9 @@ public class RegistroPeliculasDTO {
     @Override
     public String toString() {
         return "DTORegistroPeliculas{" +
-                "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", clasificacion='" + clasificacion + '\'' +
                 ", duracion=" + duracion +
-                ", genero='" + genero + '\'' +
                 ", pais='" + pais + '\'' +
                 ", sinopsis='" + sinopsis + '\'' +
                 ", trailer='" + trailer + '\'' +
