@@ -26,19 +26,15 @@ public class PeliculaNegocio implements IPeliculaNegocio{
     }
 
     @Override
-    public Pelicula buscarPeliculaPorId(int id) {
-        return peliculaDAO.obtenerPorId(id);
-    }
-
-    @Override
     public void registrarPelicula(RegistroPeliculasDTO peliculaDTO) {
         Pelicula pelicula = new Pelicula(
+                
                 peliculaDTO.getTitulo(),
                 peliculaDTO.getClasificacion(),
                 peliculaDTO.getDuracion(),
-                peliculaDTO.getPais(),
+                peliculaDTO.getPaisOrigen(),
                 peliculaDTO.getSinopsis(),
-                peliculaDTO.getTrailer()
+                peliculaDTO.getLinkTrailer()
         );
         peliculaDAO.guardar(pelicula);
     }

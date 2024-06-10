@@ -12,6 +12,4 @@ import entidad.Pelicula;
  */
 public interface IPeliculaDAO {
     void guardar(Pelicula pelicula);
-    Pelicula obtenerPorId(int id);
-    Pelicula obtenerPorTitulo(String titulo);
 }

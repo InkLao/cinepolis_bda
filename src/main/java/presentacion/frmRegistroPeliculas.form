@@ -48,7 +48,7 @@
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="fldPaisOrigen" alignment="0" pref="147" max="32767" attributes="0"/>
-                                  <Component id="fldLink" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="fldLinkTrailer" alignment="0" max="32767" attributes="0"/>
                                   <Component id="fldSinopsis" alignment="0" pref="147" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -105,7 +105,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fldLink" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fldLinkTrailer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="55" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -154,7 +154,12 @@
     <Component class="javax.swing.JComboBox" name="cmbClasificacion">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="4">
+            <StringItem index="0" value="A"/>
+            <StringItem index="1" value="B"/>
+            <StringItem index="2" value="B15"/>
+            <StringItem index="3" value="R"/>
+          </StringArray>
         </Property>
       </Properties>
       <AuxValues>
@@ -171,7 +176,7 @@
         <Property name="text" type="java.lang.String" value="Clasificaci&#xf3;n"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="fldLink">
+    <Component class="javax.swing.JTextField" name="fldLinkTrailer">
     </Component>
     <Component class="javax.swing.JTextField" name="fldPaisOrigen">
     </Component>

@@ -5,6 +5,8 @@
 package presentacion;
 
 import dtos.RegistroPeliculasDTO;
+import java.time.Duration;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 import negocio.IPeliculaNegocio;
 import negocio.PeliculaNegocio;
@@ -22,7 +24,7 @@ public class frmRegistroPeliculas extends javax.swing.JFrame {
      */
     public frmRegistroPeliculas() {
         initComponents();
-        peliculaNegocio = new PeliculaNegocio();
+        this.peliculaNegocio = new PeliculaNegocio();
     }
 
     /**
@@ -43,7 +45,7 @@ public class frmRegistroPeliculas extends javax.swing.JFrame {
         cmbClasificacion = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        fldLink = new javax.swing.JTextField();
+        fldLinkTrailer = new javax.swing.JTextField();
         fldPaisOrigen = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -70,6 +72,8 @@ public class frmRegistroPeliculas extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
+
+        cmbClasificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "B15", "R" }));
 
         jLabel1.setText("Título");
 
@@ -107,7 +111,7 @@ public class frmRegistroPeliculas extends javax.swing.JFrame {
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(fldPaisOrigen, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                    .addComponent(fldLink)
+                                    .addComponent(fldLinkTrailer)
                                     .addComponent(fldSinopsis, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -149,7 +153,7 @@ public class frmRegistroPeliculas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(fldLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fldLinkTrailer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
@@ -162,31 +166,27 @@ public class frmRegistroPeliculas extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String titulo = fldTitulo.getText().trim();
-        String clasificacion = cmbClasificacion.getSelectedItem().toString().trim();
+        String clasificacion = (String) cmbClasificacion.getSelectedItem();
         String duracionStr = fldDuracion.getText().trim();
         String paisOrigen = fldPaisOrigen.getText().trim();
         String sinopsis = fldSinopsis.getText().trim();
-        String link = fldLink.getText().trim();
+        String linkTrailer = fldLinkTrailer.getText().trim();
 
-        if (titulo.isEmpty() || clasificacion.isEmpty() || duracionStr.isEmpty() || paisOrigen.isEmpty() || sinopsis.isEmpty() || link.isEmpty()) {
+        if (titulo.isEmpty() || clasificacion.isEmpty() || duracionStr.isEmpty() || paisOrigen.isEmpty() || sinopsis.isEmpty() || linkTrailer.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        int duracion;
+        Duration duracion;
         try {
-            duracion = Integer.parseInt(duracionStr);
-            if (duracion <= 0) {
-                JOptionPane.showMessageDialog(this, "La duración debe ser un número positivo.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "La duración debe ser un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
+            duracion = Duration.parse("PT" + duracionStr.replace(":", "H") + "M");
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Formato de duración inválido. Use 'HH:MM:SS'.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Crear DTO
-        RegistroPeliculasDTO peliculaDTO = new RegistroPeliculasDTO(titulo, clasificacion, duracion, paisOrigen, sinopsis, link);
+        RegistroPeliculasDTO peliculaDTO = new RegistroPeliculasDTO(titulo, clasificacion, duracion, paisOrigen, sinopsis, linkTrailer);
 
         // Guardar la película a través de la lógica de negocio
         peliculaNegocio.registrarPelicula(peliculaDTO);
@@ -204,7 +204,7 @@ public class frmRegistroPeliculas extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cmbClasificacion;
     private javax.swing.JTextField fldDuracion;
-    private javax.swing.JTextField fldLink;
+    private javax.swing.JTextField fldLinkTrailer;
     private javax.swing.JTextField fldPaisOrigen;
     private javax.swing.JTextField fldSinopsis;
     private javax.swing.JTextField fldTitulo;

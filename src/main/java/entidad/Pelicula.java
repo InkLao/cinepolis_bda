@@ -1,54 +1,47 @@
 
 package entidad;
 
+import java.time.Duration;
+
 /**
  *
  * @author eduar
  */
 public class Pelicula {
 
-    private int id;
+    private int idPelicula;
     private String titulo;
     private String clasificacion;
-    private int duracion;
-    private String pais;
+    private Duration duracion;
+    private String paisOrigen;
     private String sinopsis;
-    private String trailer;
+    private String linkTrailer;
 
-    public Pelicula() {
-    }
-
-    public Pelicula(int id, String titulo, String clasificacion, int duracion, String pais, String sinopsis, String trailer) {
-        this.id = id;
+    public Pelicula(int idPelicula, String titulo, String clasificacion, Duration duracion, String paisOrigen, String sinopsis, String linkTrailer) {
+        this.idPelicula = idPelicula;
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
-        this.pais = pais;
+        this.paisOrigen = paisOrigen;
         this.sinopsis = sinopsis;
-        this.trailer = trailer;
+        this.linkTrailer = linkTrailer;
     }
 
-    public Pelicula(
-            String titulo, 
-            String clasificacion, 
-            int duracion, 
-            String pais, 
-            String sinopsis, 
-            String trailer) {
+    public Pelicula(String titulo, String clasificacion, Duration duracion, String paisOrigen, String sinopsis, String linkTrailer) {
         this.titulo = titulo;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
-        this.pais = pais;
+        this.paisOrigen = paisOrigen;
         this.sinopsis = sinopsis;
-        this.trailer = trailer;
+        this.linkTrailer = linkTrailer;
     }
 
-    public int getId() {
-        return id;
+    public int getIdPelicula() {
+        return idPelicula;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdPelicula(int idPelicula) {
+        this.idPelicula = idPelicula;
     }
 
     public String getTitulo() {
@@ -67,20 +60,20 @@ public class Pelicula {
         this.clasificacion = clasificacion;
     }
 
-    public int getDuracion() {
+    public Duration getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(Duration duracion) {
         this.duracion = duracion;
     }
 
-    public String getPais() {
-        return pais;
+    public String getPaisOrigen() {
+        return paisOrigen;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
+    public void setPaisOrigen(String paisOrigen) {
+        this.paisOrigen = paisOrigen;
     }
 
     public String getSinopsis() {
@@ -91,24 +84,24 @@ public class Pelicula {
         this.sinopsis = sinopsis;
     }
 
-    public String getTrailer() {
-        return trailer;
+    public String getLinkTrailer() {
+        return linkTrailer;
     }
 
-    public void setTrailer(String trailer) {
-        this.trailer = trailer;
+    public void setLinkTrailer(String linkTrailer) {
+        this.linkTrailer = linkTrailer;
     }
 
     @Override
     public String toString() {
-        return "Pelicula{"
-                + "id=" + id
-                + ", titulo='" + titulo + '\''
-                + ", clasificacion='" + clasificacion + '\''
-                + ", duracion=" + duracion
-                + ", pais='" + pais + '\''
-                + ", sinopsis='" + sinopsis + '\''
-                + ", trailer='" + trailer + '\''
-                + '}';
+        return "Pelicula{" +
+                "idPelicula=" + idPelicula +
+                ", titulo='" + titulo + '\'' +
+                ", clasificacion='" + clasificacion + '\'' +
+                ", duracion=" + duracion +
+                ", paisOrigen='" + paisOrigen + '\'' +
+                ", sinopsis='" + sinopsis + '\'' +
+                ", linkTrailer='" + linkTrailer + '\'' +
+                '}';
     }
 }

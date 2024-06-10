@@ -6,6 +6,7 @@ package presentacion;
 
 import dtos.RegistroFuncionDTO;
 import entidad.Pelicula;
+import entidad.Sala;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -23,13 +24,16 @@ public class frmRegistroFuncion extends javax.swing.JFrame {
 
     private IFuncionNegocio funcionNegocio;
     private List<Pelicula> peliculasDisponibles;
+    private List<Sala> salasDisponibles;
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public frmRegistroFuncion(List<Pelicula> peliculasDisponibles) {
+    public frmRegistroFuncion(List<Pelicula> peliculasDisponibles, List<Sala> salasDisponibles) {
         initComponents();
         this.funcionNegocio = new FuncionNegocio();
         this.peliculasDisponibles = peliculasDisponibles;
+        this.salasDisponibles = salasDisponibles;
         cargarPeliculas();
+        cargarSalas();
     }
 
     private void cargarPeliculas() {
@@ -38,6 +42,14 @@ public class frmRegistroFuncion extends javax.swing.JFrame {
             model.addElement(pelicula);
         }
         cmbPelicula.setModel(model);
+    }
+
+    private void cargarSalas() {
+        DefaultComboBoxModel<Sala> model = new DefaultComboBoxModel<>();
+        for (Sala sala : salasDisponibles) {
+            model.addElement(sala);
+        }
+        cmbSala.setModel(model);
     }
 
     /**
@@ -57,9 +69,9 @@ public class frmRegistroFuncion extends javax.swing.JFrame {
         fldHora = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        fldSala = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         fldDisponibilidad = new javax.swing.JTextField();
+        cmbSala = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,8 +127,8 @@ public class frmRegistroFuncion extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fldHora, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fldSala, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fldDisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(fldDisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbSala, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,7 +147,7 @@ public class frmRegistroFuncion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(fldSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -153,10 +165,10 @@ public class frmRegistroFuncion extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Pelicula pelicula = (Pelicula) cmbPelicula.getSelectedItem();
         String horaStr = fldHora.getText().trim();
-        String sala = fldSala.getText().trim();
+        Sala sala = (Sala) cmbSala.getSelectedItem();
         String disponibilidadStr = fldDisponibilidad.getText().trim();
 
-        if (pelicula == null || horaStr.isEmpty() || sala.isEmpty() || disponibilidadStr.isEmpty()) {
+        if (pelicula == null || horaStr.isEmpty() || sala == null || disponibilidadStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -198,9 +210,9 @@ public class frmRegistroFuncion extends javax.swing.JFrame {
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<Pelicula> cmbPelicula;
+    private javax.swing.JComboBox<Sala> cmbSala;
     private javax.swing.JTextField fldDisponibilidad;
     private javax.swing.JTextField fldHora;
-    private javax.swing.JTextField fldSala;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

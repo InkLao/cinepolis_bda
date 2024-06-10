@@ -5,6 +5,7 @@
 package dtos;
 
 import entidad.Pelicula;
+import entidad.Sala;
 import java.time.LocalDateTime;
 
 /**
@@ -14,10 +15,10 @@ import java.time.LocalDateTime;
 public class RegistroFuncionDTO {
     private Pelicula pelicula;
     private LocalDateTime hora;
-    private String sala;
+    private Sala sala;
     private int disponibilidad;
 
-    public RegistroFuncionDTO(Pelicula pelicula, LocalDateTime hora, String sala, int disponibilidad) {
+    public RegistroFuncionDTO(Pelicula pelicula, LocalDateTime hora, Sala sala, int disponibilidad) {
         this.pelicula = pelicula;
         this.hora = hora;
         this.sala = sala;
@@ -40,11 +41,11 @@ public class RegistroFuncionDTO {
         this.hora = hora;
     }
 
-    public String getSala() {
+    public Sala getSala() {
         return sala;
     }
 
-    public void setSala(String sala) {
+    public void setSala(Sala sala) {
         this.sala = sala;
     }
 
@@ -59,9 +60,9 @@ public class RegistroFuncionDTO {
     @Override
     public String toString() {
         return "DTORegistroFuncion{" +
-                "pelicula='" + pelicula + '\'' +
-                ", hora='" + hora + '\'' +
-                ", sala='" + sala + '\'' +
+                "pelicula=" + pelicula +
+                ", hora=" + hora +
+                ", sala=" + sala +
                 ", disponibilidad=" + disponibilidad +
                 '}';
     }

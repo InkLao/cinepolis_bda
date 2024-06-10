@@ -12,25 +12,22 @@ public class Funcion {
     private int id;
     private Pelicula pelicula;
     private LocalDateTime hora;
-    private String sala;
-    private int asientosDisponibles;
+    private Sala sala;
+    private int disponibilidad;
 
-    public Funcion() {
-    }
-
-    public Funcion(int id, Pelicula pelicula, LocalDateTime hora, String sala, int asientosDisponibles) {
+    public Funcion(int id, Pelicula pelicula, LocalDateTime hora, Sala sala, int disponibilidad) {
         this.id = id;
         this.pelicula = pelicula;
         this.hora = hora;
         this.sala = sala;
-        this.asientosDisponibles = asientosDisponibles;
+        this.disponibilidad = disponibilidad;
     }
 
-    public Funcion(Pelicula pelicula, LocalDateTime hora, String sala, int asientosDisponibles) {
+    public Funcion(Pelicula pelicula, LocalDateTime hora, Sala sala, int disponibilidad) {
         this.pelicula = pelicula;
         this.hora = hora;
         this.sala = sala;
-        this.asientosDisponibles = asientosDisponibles;
+        this.disponibilidad = disponibilidad;
     }
 
     public int getId() {
@@ -53,34 +50,34 @@ public class Funcion {
         return hora;
     }
 
-    public void setHora(LocalDateTime fecha) {
-        this.hora = fecha;
+    public void setHora(LocalDateTime hora) {
+        this.hora = hora;
     }
 
-    public String getSala() {
+    public Sala getSala() {
         return sala;
     }
 
-    public void setSala(String sala) {
+    public void setSala(Sala sala) {
         this.sala = sala;
     }
 
-    public int getAsientosDisponibles() {
-        return asientosDisponibles;
+    public int getDisponibilidad() {
+        return disponibilidad;
     }
 
-    public void setAsientosDisponibles(int asientosDisponibles) {
-        this.asientosDisponibles = asientosDisponibles;
+    public void setDisponibilidad(int disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
-    
-     @Override
+
+    @Override
     public String toString() {
         return "Funcion{" +
-                "id=" + id +
-                ", pelicula=" + pelicula +
+                "pelicula=" + pelicula +
                 ", hora=" + hora +
-                ", sala='" + sala + '\'' +
-                ", asientosDisponibles=" + asientosDisponibles +
+                ", sala=" + sala +
+                ", disponibilidad=" + disponibilidad +
                 '}';
     }
+
 }

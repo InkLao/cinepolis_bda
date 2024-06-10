@@ -14,5 +14,4 @@ import entidad.Pelicula;
 public interface IPeliculaNegocio {
     void registrarPelicula(Pelicula pelicula);
     void registrarPelicula(RegistroPeliculasDTO peliculaDTO);
-    Pelicula buscarPeliculaPorId(int id);
 }
