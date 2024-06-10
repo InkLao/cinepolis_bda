@@ -4,7 +4,7 @@
  */
 package persistencia;
 
-import entidad.FuncionEntidad;
+import entidad.PeliculaEntidad;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,9 +13,8 @@ import java.util.List;
  *
  * @author santi
  */
-public interface IFuncionDAO {
+public interface IPeliculasDAO {
     
-        public List<FuncionEntidad> buscarFuncionesTabla(String pelicula1) throws PersistenciaException;
-        
-            public FuncionEntidad convertirAEntidad(ResultSet resultado) throws SQLException;
+    public PeliculaEntidad convertirAEntidad(ResultSet resultado) throws SQLException ;
+    public List<PeliculaEntidad> buscarPeliculasTabla(int idSucursal) throws PersistenciaException ;    
 }

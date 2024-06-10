@@ -9,14 +9,11 @@ import dtos.validarClienteDTO;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.ICiudadNegocio;
+import negocio.IFuncionNegocio;
+import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
-import negocio.NegocioException;
-import persistencia.ClienteDAO;
-import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
 import persistencia.PersistenciaException;
 
@@ -29,13 +26,19 @@ public class frmRegistroCliente extends javax.swing.JFrame {
     IClienteDAO cliente;
     ICiudadNegocio ciudad;
     ISucursalNegocio sucursal;
+    IPeliculaNegocio pelicula;
+    IFuncionNegocio funcion;
+    
 
     /**
      * Creates new form frmLogin
      */
-    public frmRegistroCliente(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal) {
+    public frmRegistroCliente(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
         this.cliente = cliente;
         this.ciudad = ciudad;
+        this.sucursal = sucursal;
+        this.pelicula = pelicula;
+        this.funcion = funcion;
         initComponents();
     }
 
@@ -194,7 +197,10 @@ public class frmRegistroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
-        frmLogin x = new frmLogin(cliente, ciudad, sucursal);
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        
+        frmLogin x = new frmLogin(cliente, ciudad, sucursal, pelicula, funcion);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed

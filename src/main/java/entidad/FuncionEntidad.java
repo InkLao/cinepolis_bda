@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dtos;
+package entidad;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
  *
  * @author santi
  */
-public class FuncionDTO {
+public class FuncionEntidad {
     
     private String titulo;
     private Timestamp duracion;
@@ -19,9 +18,7 @@ public class FuncionDTO {
     private String sala;
     private int precio;  
     
-    public FuncionDTO (){}
-    
-    public FuncionDTO (String titulo, Timestamp duracion, int asientosdisponibles, String sala, int precio) {
+    public FuncionEntidad (String titulo, Timestamp duracion, int asientosdisponibles, String sala, int precio) {
     this.titulo = titulo;
     this.duracion = duracion;
     this.asientosdisponibles = asientosdisponibles;

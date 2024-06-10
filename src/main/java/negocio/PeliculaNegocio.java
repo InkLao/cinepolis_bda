@@ -4,28 +4,56 @@
  */
 package negocio;
 
-import entidad.Pelicula;
-import persistencia.IPeliculaDAO;
-import persistencia.PeliculaDAO;
+import dtos.PeliculaDTO;
+import dtos.SucursalDTO;
+import entidad.PeliculaEntidad;
+import java.util.ArrayList;
+import java.util.List;
+import persistencia.IPeliculasDAO;
+import persistencia.PersistenciaException;
 
 /**
  *
- * @author eduar
+ * @author santi
  */
 public class PeliculaNegocio implements IPeliculaNegocio{
-    private IPeliculaDAO peliculaDAO;
+    
+    private IPeliculasDAO peliculaDAO;
 
-    public PeliculaNegocio() {
-        this.peliculaDAO = new PeliculaDAO();
+    public PeliculaNegocio(IPeliculasDAO peliculaDAO) {
+        this.peliculaDAO = peliculaDAO;
     }
-
+    
     @Override
-    public void registrarPelicula(Pelicula pelicula) {
-        peliculaDAO.guardar(pelicula);
+    public List<PeliculaDTO> buscarPeliculaTabla(int idSucursal) throws NegocioException {
+         try {
+            List<PeliculaEntidad> peliculas = this.peliculaDAO. buscarPeliculasTabla(idSucursal);
+            return this.convertirPeliculasTablaDTO(peliculas);
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
     }
+    
+    public List<PeliculaDTO> convertirPeliculasTablaDTO(List<PeliculaEntidad> peliculas) throws NegocioException {
+        if (peliculas == null) {
+            throw new NegocioException("No se pudieron obtener las sucursales");
+        }
 
-    @Override
-    public Pelicula buscarPeliculaPorId(int id) {
-        return peliculaDAO.obtenerPorId(id);
-    }
+        List<PeliculaDTO> peliculaDTO = new ArrayList<>();
+        for (PeliculaEntidad pelicula : peliculas) {
+            PeliculaDTO dto = new PeliculaDTO();
+            dto.setTitulo(pelicula.getTitulo());
+            dto.setClasificacion(pelicula.getClasificacion());
+            dto.setGenero(pelicula.getGenero());
+            dto.setDuracion(pelicula.getDuracion());
+            dto.setPais(pelicula.getPais());
+            dto.setTrailer(pelicula.getTrailer());
+            dto.setSinopsis(pelicula.getSinopsis());
+            peliculaDTO.add(dto);
+        }
+        return peliculaDTO;
+    }    
+    
 }

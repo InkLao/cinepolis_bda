@@ -4,13 +4,16 @@
  */
 package negocio;
 
-import entidad.Pelicula;
+import dtos.PeliculaDTO;
+import entidad.PeliculaEntidad;
+import java.util.List;
 
 /**
  *
  * @author eduar
  */
 public interface IPeliculaNegocio {
-    void registrarPelicula(Pelicula pelicula);
-    Pelicula buscarPeliculaPorId(int id);
+
+        public List<PeliculaDTO> buscarPeliculaTabla(int idSucursal) throws NegocioException;
+        public List<PeliculaDTO> convertirPeliculasTablaDTO(List<PeliculaEntidad> peliculas) throws NegocioException;
 }

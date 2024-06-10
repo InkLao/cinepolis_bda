@@ -4,13 +4,16 @@
  */
 package negocio;
 
-import entidad.Funcion;
+import dtos.FuncionDTO;
+import entidad.FuncionEntidad;
+import java.util.List;
 
 /**
  *
- * @author eduar
+ * @author santi
  */
 public interface IFuncionNegocio {
-    void registrarFuncion(Funcion funcion);
-    Funcion buscarFuncionPorId(int id);
+
+    public List<FuncionDTO> buscarFuncionesTabla(String pelicula1) throws NegocioException ;
+    public List<FuncionDTO> convertirFuncionesTablaDTO(List<FuncionEntidad> funciones) throws NegocioException ;    
 }

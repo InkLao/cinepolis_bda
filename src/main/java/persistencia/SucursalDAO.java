@@ -27,13 +27,14 @@ public class SucursalDAO implements ISucursalDAO{
     
     
         @Override
-        public List<SucursalEntidad> buscarSucursalTabla() throws PersistenciaException {
+        public List<SucursalEntidad> buscarSucursalTabla(int idCiudad) throws PersistenciaException {
         try {
             List<SucursalEntidad> sucursalLista = null;
 
             Connection conexion = this.conexionBD.crearConexion();
-            String codigoSQL = "select idSucursal, nombre, direccion, idCiudad from sucursales;";
+            String codigoSQL = "select idSucursal, nombre, direccion, idCiudad from sucursales where idCiudad = ?;";
             PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+            preparedStatement.setInt(1, idCiudad);
             ResultSet resultado = preparedStatement.executeQuery();
             while (resultado.next()) {
                 if (sucursalLista == null) {

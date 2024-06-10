@@ -4,6 +4,8 @@
  */
 package dtos;
 
+import java.time.LocalTime;
+
 /**
  *
  * @author eduar
@@ -12,35 +14,25 @@ public class PeliculaDTO {
     private int id;
     private String titulo;
     private String clasificacion;
-    private int duracion;
     private String genero;
+    private LocalTime duracion;
     private String pais;
-    private String sinopsis;
     private String trailer;
+    private String sinopsis;
 
     public PeliculaDTO() {
     }
 
-    public PeliculaDTO(String titulo, String clasificacion, int duracion, String genero, String pais, String sinopsis, String trailer) {
+    public PeliculaDTO(String titulo, String clasificacion, String genero, LocalTime duracion, String pais, String trailer, String sinopsis) {
         this.titulo = titulo;
         this.clasificacion = clasificacion;
-        this.duracion = duracion;
         this.genero = genero;
+        this.duracion = duracion;
         this.pais = pais;
         this.sinopsis = sinopsis;
         this.trailer = trailer;
     }
 
-    public PeliculaDTO(int id, String titulo, String clasificacion, int duracion, String genero, String pais, String sinopsis, String trailer) {
-        this.id = id;
-        this.titulo = titulo;
-        this.clasificacion = clasificacion;
-        this.duracion = duracion;
-        this.genero = genero;
-        this.pais = pais;
-        this.sinopsis = sinopsis;
-        this.trailer = trailer;
-    }
 
     public int getId() {
         return id;
@@ -66,13 +58,13 @@ public class PeliculaDTO {
         this.clasificacion = clasificacion;
     }
 
-    public int getDuracion() {
+    public LocalTime getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(LocalTime duracion) {
         this.duracion = duracion;
-    }
+    }    
 
     public String getGenero() {
         return genero;

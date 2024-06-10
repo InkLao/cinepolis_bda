@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ISucursalDAO {
     
-        public List<SucursalEntidad> buscarSucursalTabla() throws PersistenciaException;    
+        public List<SucursalEntidad> buscarSucursalTabla(int idCiudad) throws PersistenciaException;    
     
     public SucursalEntidad convertirAEntidad(ResultSet resultado) throws SQLException;    
     

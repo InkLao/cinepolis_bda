@@ -5,9 +5,9 @@
 package presentacion;
 
 import negocio.ICiudadNegocio;
+import negocio.IFuncionNegocio;
+import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
-import persistencia.ClienteDAO;
-import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
 
 /**
@@ -19,13 +19,17 @@ public class frmLogin extends javax.swing.JFrame {
     private IClienteDAO cliente;
     private ICiudadNegocio ciudad;
     private ISucursalNegocio sucursal;
+    private IPeliculaNegocio pelicula;
+    private IFuncionNegocio funcion;
     /**
      * Creates new form frmLogin
      */
-    public frmLogin(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal) {
+    public frmLogin(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
+        this.pelicula = pelicula;
+        this.funcion = funcion;
         initComponents();
     }
 
@@ -89,7 +93,10 @@ public class frmLogin extends javax.swing.JFrame {
         IClienteDAO cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
-        frmIniciarSesion x = new frmIniciarSesion(cliente, ciudad, sucursal);
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        
+        frmIniciarSesion x = new frmIniciarSesion(cliente, ciudad, sucursal, pelicula, funcion);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnIniciarSesiónActionPerformed
@@ -99,8 +106,10 @@ public class frmLogin extends javax.swing.JFrame {
         IClienteDAO cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
         
-        frmRegistroCliente x = new frmRegistroCliente(cliente, ciudad, sucursal);
+        frmRegistroCliente x = new frmRegistroCliente(cliente, ciudad, sucursal, pelicula, funcion);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed

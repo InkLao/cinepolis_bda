@@ -4,35 +4,50 @@
  */
 package presentacion;
 
+import dtos.PeliculaDTO;
 import dtos.SucursalDTO;
 import dtos.ciudadDTO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import negocio.ICiudadNegocio;
+import negocio.IFuncionNegocio;
+import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
 import negocio.NegocioException;
-import persistencia.ICiudadDAO;
+import utilerias.JButtonRenderer;
 import persistencia.IClienteDAO;
+import utilerias.JButtonCellEditor;
 
 /**
  *
  * @author santi
  */
-public class frmFuncion extends javax.swing.JFrame {
+public class frmCartelera extends javax.swing.JFrame {
 
     IClienteDAO cliente = this.cliente;
     ICiudadNegocio ciudad = this.ciudad;
     ISucursalNegocio sucursal = this.sucursal;
+    IPeliculaNegocio pelicula = this.pelicula;
+    IFuncionNegocio funcion = this.funcion;
     /**
      * Creates new form frmLogin
      */
-    public frmFuncion(ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio) {
+    public frmCartelera(IClienteDAO cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcion) {
+        this.cliente = cliente;
         this.ciudad = ciudadNegocio;
         this.sucursal = sucursalNegocio;
+        this.pelicula = peliculaNegocio;
+        this.funcion = funcion;
         initComponents();
         llenarBoxCiudades(buscarCiudadTabla());
+        cargarConfiguracionInicialTablaCartelera();
     }
+    
+    
     
     private List<ciudadDTO> buscarCiudadTabla() {
         List<ciudadDTO> ciudadLista = null;
@@ -48,11 +63,42 @@ public class frmFuncion extends javax.swing.JFrame {
         return ciudadLista;
     }  
     
-    private List<SucursalDTO> buscarSucursalTabla() {
+    private void cargarConfiguracionInicialTablaCartelera() { 
+        
+        ActionListener onEditarClickListener = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            funcionesPelicula();
+            }               
+        };
+            
+        TableColumnModel modeloColumnas = this.tblPelicula.getColumnModel();
+        modeloColumnas.getColumn(7).setCellRenderer(new JButtonRenderer("Funciones"));
+        modeloColumnas.getColumn(7).setCellEditor(new JButtonCellEditor("Funciones",onEditarClickListener));
+    }
+    
+    private void funcionesPelicula(){
+                    
+        IClienteDAO cliente = this.cliente;        
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        
+        String pelicula1 = (String) tblPelicula.getValueAt(tblPelicula.getSelectedRow(), 0);
+        
+        frmFunciones x = new frmFunciones(cliente, ciudad, sucursal, pelicula, funcion, pelicula1);
+        x.setVisible(true);
+        setVisible(false);        
+                
+    }
+    
+    private List<SucursalDTO> buscarSucursalTabla(int idCiudad) {
         List<SucursalDTO> sucursalLista = null;
         try {
             
-            sucursalLista = this.sucursal.buscarSucursalTabla();
+            sucursalLista = this.sucursal.buscarSucursalTabla(idCiudad);
 
 
         } catch (NegocioException ex) {
@@ -72,12 +118,48 @@ public class frmFuncion extends javax.swing.JFrame {
     
     private void llenarBoxSucursal(List<SucursalDTO> sucursalLista) {
         int i = 0;
+        boxSucursal.removeAllItems();
         while (sucursalLista.size() > i) {
             boxSucursal.addItem(sucursalLista.get(i).getNombre());
             i++;
         }
     }      
 
+    private void llenarTablaPeliculas(List<PeliculaDTO> peliculasLista) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPelicula.getModel();
+
+        if (modeloTabla.getRowCount() > 0) {
+            for (int i = modeloTabla.getRowCount() - 1; i > -1; i--) {
+                modeloTabla.removeRow(i);
+            }
+        }
+
+        if (peliculasLista != null) {
+            peliculasLista.forEach(row -> {
+                Object[] fila = new Object[7];
+                fila[0] = row.getTitulo();
+                fila[1] = row.getClasificacion();
+                fila[2] = row.getGenero();
+                fila[3] = row.getDuracion();
+                fila[4] = row.getPais();
+                fila[5] = row.getTrailer();
+                fila[6] = row.getSinopsis();
+
+                modeloTabla.addRow(fila);
+            });
+        }
+    }
+         
+    private void cargarPeliculasEnTabla(int idSucursal) {
+        try {
+            List<PeliculaDTO> peliculas = this.pelicula.buscarPeliculaTabla(idSucursal);
+            this.llenarTablaPeliculas(peliculas);
+        } catch (NegocioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+        
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,27 +169,19 @@ public class frmFuncion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGuardar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
         boxCiudad = new javax.swing.JComboBox<>();
         boxSucursal = new javax.swing.JComboBox<>();
         btnACiudad = new javax.swing.JButton();
         btnASucursal = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblFuncion = new javax.swing.JTable();
+        tblPelicula = new javax.swing.JTable();
         btnFuncion = new javax.swing.JButton();
         btnSucursal = new javax.swing.JButton();
         btnPeliculas = new javax.swing.JButton();
         btnSalas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
 
         btnAtras.setText("Atrás");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +196,12 @@ public class frmFuncion extends javax.swing.JFrame {
             }
         });
 
+        boxSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSucursalActionPerformed(evt);
+            }
+        });
+
         btnACiudad.setText("Aceptar");
         btnACiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,19 +210,24 @@ public class frmFuncion extends javax.swing.JFrame {
         });
 
         btnASucursal.setText("Aceptar");
+        btnASucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnASucursalActionPerformed(evt);
+            }
+        });
 
-        tblFuncion.setModel(new javax.swing.table.DefaultTableModel(
+        tblPelicula.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Título", "Clasificación", "Género", "Duración", "País", "Trailer", "Sinopsis", "Función"
             }
         ));
-        jScrollPane1.setViewportView(tblFuncion);
+        jScrollPane1.setViewportView(tblPelicula);
 
         btnFuncion.setText("Agregar Funcion");
 
@@ -161,31 +246,28 @@ public class frmFuncion extends javax.swing.JFrame {
                 .addComponent(btnAtras)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addComponent(boxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnACiudad)
                         .addGap(354, 354, 354)
                         .addComponent(boxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnASucursal))
-                    .addComponent(btnGuardar)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnASucursal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFuncion)
-                            .addComponent(btnSucursal))
-                        .addGap(27, 27, 27))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnPeliculas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSalas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(btnPeliculas, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnFuncion)
+                        .addComponent(btnSucursal))
+                    .addComponent(btnSalas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,9 +289,7 @@ public class frmFuncion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSalas)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAtras)
-                    .addComponent(btnGuardar))
+                .addComponent(btnAtras)
                 .addContainerGap())
         );
 
@@ -221,26 +301,44 @@ public class frmFuncion extends javax.swing.JFrame {
         IClienteDAO cliente = this.cliente;        
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
-        frmLogin x = new frmLogin(cliente, ciudad, sucursal);
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        
+        frmLogin x = new frmLogin(cliente, ciudad, sucursal, pelicula, funcion);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-        frmBoletos x = new frmBoletos();
-        x.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
     private void boxCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCiudadActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPelicula.getModel();
+        modeloTabla.setRowCount(0);
     }//GEN-LAST:event_boxCiudadActionPerformed
 
     private void btnACiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnACiudadActionPerformed
         // TODO add your handling code here:
-        llenarBoxSucursal(buscarSucursalTabla());
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPelicula.getModel();
+        modeloTabla.setRowCount(0);
+        int idCiudad = boxCiudad.getSelectedIndex() + 1;
+        llenarBoxSucursal(buscarSucursalTabla(idCiudad));
+        tblPelicula.clearSelection();
+        
     }//GEN-LAST:event_btnACiudadActionPerformed
+
+    private void boxSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSucursalActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPelicula.getModel();
+        modeloTabla.setRowCount(0);
+
+    }//GEN-LAST:event_boxSucursalActionPerformed
+
+    private void btnASucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnASucursalActionPerformed
+        // TODO add your handling code here: 
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblPelicula.getModel();
+        modeloTabla.setRowCount(0);        
+        int idSucursal = boxSucursal.getSelectedIndex() + 1;  
+        cargarPeliculasEnTabla(idSucursal);
+    }//GEN-LAST:event_btnASucursalActionPerformed
 
 
 
@@ -251,11 +349,10 @@ public class frmFuncion extends javax.swing.JFrame {
     private javax.swing.JButton btnASucursal;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnFuncion;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnPeliculas;
     private javax.swing.JButton btnSalas;
     private javax.swing.JButton btnSucursal;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblFuncion;
+    private javax.swing.JTable tblPelicula;
     // End of variables declaration//GEN-END:variables
 }

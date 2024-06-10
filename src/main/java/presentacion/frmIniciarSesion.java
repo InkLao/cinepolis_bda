@@ -9,9 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.ICiudadNegocio;
+import negocio.IFuncionNegocio;
+import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
-import persistencia.ClienteDAO;
-import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
 import persistencia.PersistenciaException;
 
@@ -24,13 +24,17 @@ public class frmIniciarSesion extends javax.swing.JFrame {
     IClienteDAO cliente = this.cliente;    
     ICiudadNegocio ciudad = this.ciudad;
     ISucursalNegocio sucursal = this.sucursal;
+    IPeliculaNegocio pelicula = this.pelicula;
+    IFuncionNegocio funcion = this.funcion;
     /**
      * Creates new form frmLogin
      */
-    public frmIniciarSesion(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal) {
+    public frmIniciarSesion(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
+        this.pelicula = pelicula;
+        this.funcion = funcion;
         initComponents();
     }
 
@@ -126,16 +130,20 @@ public class frmIniciarSesion extends javax.swing.JFrame {
         IClienteDAO cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
-        frmLogin x = new frmLogin(cliente, ciudad, sucursal);
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        frmLogin x = new frmLogin(cliente, ciudad, sucursal, pelicula, funcion);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        
+        IClienteDAO cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
         
         String val1 = fldCorreo.getText();
         String val2 = fldContraseña.getText(); 
@@ -144,7 +152,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
             if (validarCliente(clienteAV) == true){
                 
                 JOptionPane.showMessageDialog(this, "Sesión Iniciada");
-                frmFuncion x = new frmFuncion(ciudad, sucursal);
+                frmCartelera x = new frmCartelera(cliente,ciudad, sucursal, pelicula, funcion);
                 x.setVisible(true);
                 setVisible(false);
             } else JOptionPane.showMessageDialog(this, "Datos de inicio de sesión inexistentes");        
