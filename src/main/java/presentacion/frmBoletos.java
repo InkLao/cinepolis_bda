@@ -35,10 +35,13 @@ public class frmBoletos extends javax.swing.JFrame {
         tblPelicula = new javax.swing.JTable();
         boxAsientos = new javax.swing.JComboBox<>();
         fldCosto = new javax.swing.JTextField();
+        jLLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnGuardar.setText("Guardar");
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 470, -1, -1));
 
         btnAtras.setText("Atrás");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -46,6 +49,7 @@ public class frmBoletos extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, -1, -1));
 
         tblPelicula.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,43 +64,16 @@ public class frmBoletos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblPelicula);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 678, 214));
+
         boxAsientos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(boxAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, -1, -1));
 
         fldCosto.setEditable(false);
+        getContentPane().add(fldCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, 76, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAtras))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnGuardar)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(308, 308, 308)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(boxAsientos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fldCosto)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(boxAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fldCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAtras)
-                    .addComponent(btnGuardar))
-                .addContainerGap())
-        );
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utilerias/Cinépolis (1).png"))); // NOI18N
+        getContentPane().add(jLLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 520, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -180,6 +157,7 @@ public class frmBoletos extends javax.swing.JFrame {
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JTextField fldCosto;
+    private javax.swing.JLabel jLLogo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPelicula;
     // End of variables declaration//GEN-END:variables

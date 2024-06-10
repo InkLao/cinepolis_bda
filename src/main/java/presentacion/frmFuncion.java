@@ -73,8 +73,10 @@ public class frmFuncion extends javax.swing.JFrame {
         btnSucursal = new javax.swing.JButton();
         btnPeliculas = new javax.swing.JButton();
         btnSalas = new javax.swing.JButton();
+        jLLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +84,7 @@ public class frmFuncion extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(634, 456, -1, -1));
 
         btnAtras.setText("Atrás");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -89,18 +92,23 @@ public class frmFuncion extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 456, -1, -1));
 
         boxCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxCiudadActionPerformed(evt);
             }
         });
+        getContentPane().add(boxCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 160, -1, -1));
 
         boxSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(boxSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(541, 160, -1, -1));
 
         btnACiudad.setText("Aceptar");
+        getContentPane().add(btnACiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 160, -1, -1));
 
         btnASucursal.setText("Aceptar");
+        getContentPane().add(btnASucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 160, -1, -1));
 
         tblFuncion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,74 +123,22 @@ public class frmFuncion extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblFuncion);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 199, 678, 214));
+
         btnFuncion.setText("Agregar Funcion");
+        getContentPane().add(btnFuncion, new org.netbeans.lib.awtextra.AbsoluteConstraints(755, 160, -1, -1));
 
         btnSucursal.setText("Agregar Sucursal");
+        getContentPane().add(btnSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(755, 199, -1, -1));
 
         btnPeliculas.setText("Agregar Películas");
+        getContentPane().add(btnPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(729, 238, -1, -1));
 
         btnSalas.setText("Agregar Salas");
+        getContentPane().add(btnSalas, new org.netbeans.lib.awtextra.AbsoluteConstraints(729, 277, 125, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAtras)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(boxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnACiudad)
-                        .addGap(354, 354, 354)
-                        .addComponent(boxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnASucursal))
-                    .addComponent(btnGuardar)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFuncion)
-                            .addComponent(btnSucursal))
-                        .addGap(27, 27, 27))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnPeliculas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSalas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnACiudad)
-                    .addComponent(btnASucursal)
-                    .addComponent(btnFuncion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSucursal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPeliculas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalas)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAtras)
-                    .addComponent(btnGuardar))
-                .addContainerGap())
-        );
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utilerias/Cinépolis (1).png"))); // NOI18N
+        getContentPane().add(jLLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 450, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -220,6 +176,7 @@ public class frmFuncion extends javax.swing.JFrame {
     private javax.swing.JButton btnPeliculas;
     private javax.swing.JButton btnSalas;
     private javax.swing.JButton btnSucursal;
+    private javax.swing.JLabel jLLogo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblFuncion;
     // End of variables declaration//GEN-END:variables
