@@ -6,7 +6,7 @@ package persistencia;
 
 import dtos.registrarClienteDTO;
 import dtos.validarClienteDTO;
-import entidad.Cliente;
+import entidad.ClienteEntidad;
 import negocio.NegocioException;
 
 /**
@@ -19,8 +19,8 @@ public interface IClienteDAO {
     
     boolean validarCliente(validarClienteDTO cliente) throws PersistenciaException;
     
-    Cliente obtenerPorId(int id);
+    ClienteEntidad obtenerPorId(int id);
     
-    Cliente obtenerPorEmail(String email);
+    ClienteEntidad obtenerPorEmail(String email);
     
 }

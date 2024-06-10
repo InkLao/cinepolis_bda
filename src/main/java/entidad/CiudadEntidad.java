@@ -8,15 +8,15 @@ package entidad;
  *
  * @author santi
  */
-public class Ciudad {
+public class CiudadEntidad {
     private int idCiudad;
     private String nombre;
     private int idPais; 
 
-    public Ciudad() {
+    public CiudadEntidad() {
     }
 
-    public Ciudad(int idCiudad, String nombre, int idPais) {
+    public CiudadEntidad(int idCiudad, String nombre, int idPais) {
         this.idCiudad = idCiudad;
         this.nombre = nombre;
         this.idPais = idPais;

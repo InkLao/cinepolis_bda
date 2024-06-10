@@ -4,7 +4,7 @@ package entidad;
  *
  * @author eduar
  */
-public class Cliente {
+public class ClienteEntidad {
     private int idCliente;
     private String nombre;
     private String apellido;
@@ -12,10 +12,10 @@ public class Cliente {
     private String ciudad;
     private String fechaNacimiento;
 
-    public Cliente() {
+    public ClienteEntidad() {
     }
 
-    public Cliente(
+    public ClienteEntidad(
             String nombre, 
             String apellido, 
             String email, 
@@ -28,7 +28,7 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Cliente(
+    public ClienteEntidad(
             int idCliente, 
             String nombre, 
             String apellido, 

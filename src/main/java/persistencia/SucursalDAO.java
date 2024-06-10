@@ -5,6 +5,7 @@
 package persistencia;
 
 import entidad.CiudadEntidad;
+import entidad.SucursalEntidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,33 +17,33 @@ import java.util.List;
  *
  * @author santi
  */
-public class CiudadDAO implements ICiudadDAO{
+public class SucursalDAO implements ISucursalDAO{
     
     private IConexionBD conexionBD;
 
-    public CiudadDAO(IConexionBD conexionBD) {
+    public SucursalDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
     
     
         @Override
-        public List<CiudadEntidad> buscarCiudadTabla() throws PersistenciaException {
+        public List<SucursalEntidad> buscarSucursalTabla() throws PersistenciaException {
         try {
-            List<CiudadEntidad> ciudadLista = null;
+            List<SucursalEntidad> sucursalLista = null;
 
             Connection conexion = this.conexionBD.crearConexion();
-            String codigoSQL = "select idCiudad, nombre, idPais from ciudades;";
+            String codigoSQL = "select idSucursal, nombre, direccion, idCiudad from sucursales;";
             PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
             ResultSet resultado = preparedStatement.executeQuery();
             while (resultado.next()) {
-                if (ciudadLista == null) {
-                    ciudadLista = new ArrayList<>();
+                if (sucursalLista == null) {
+                    sucursalLista = new ArrayList<>();
                 }
-                CiudadEntidad ciudad = this.convertirAEntidad(resultado);
-                ciudadLista.add(ciudad);
+                SucursalEntidad sucursales = this.convertirAEntidad(resultado);
+                sucursalLista.add(sucursales);
             }
             conexion.close();
-            return ciudadLista;
+            return sucursalLista;
         } catch (SQLException ex) {
             // hacer uso de Logger
             System.out.println(ex.getMessage());
@@ -51,11 +52,12 @@ public class CiudadDAO implements ICiudadDAO{
     }
 
     @Override
-    public CiudadEntidad convertirAEntidad(ResultSet resultado) throws SQLException {
-        int idCiudad = resultado.getInt("idCiudad");
+    public SucursalEntidad convertirAEntidad(ResultSet resultado) throws SQLException {
+        int idSucursal = resultado.getInt("idSucursal");
         String nombre = resultado.getString("nombre");
-        int idPais = resultado.getInt("idPais");
-        return new CiudadEntidad(idCiudad, nombre, idPais);
+        String direccion = resultado.getString("nombre");
+        int idCiudad = resultado.getInt("idCiudad");
+        return new SucursalEntidad(idSucursal, nombre, direccion, idCiudad);
     }    
     
 }

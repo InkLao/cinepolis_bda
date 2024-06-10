@@ -8,12 +8,16 @@ import negocio.CiudadNegocio;
 import negocio.ClienteNegocio;
 import negocio.ICiudadNegocio;
 import negocio.IClienteNegocio;
+import negocio.ISucursalNegocio;
+import negocio.SucursalNegocio;
 import persistencia.CiudadDAO;
 import persistencia.ClienteDAO;
 import persistencia.ConexionBD;
 import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
 import persistencia.IConexionBD;
+import persistencia.ISucursalDAO;
+import persistencia.SucursalDAO;
 import presentacion.frmLogin;
 
 /**
@@ -25,13 +29,18 @@ public class Cinepolis_bda {
 
     public static void main(String[] args) {
         IConexionBD conexionBD = new ConexionBD();
+        
         IClienteDAO clienteDAO =  new ClienteDAO(conexionBD);
+        
         ICiudadDAO ciudadDAO = new CiudadDAO(conexionBD);
         ICiudadNegocio ciudadNegocio = new CiudadNegocio(ciudadDAO);
         
+        ISucursalDAO sucursalDAO = new SucursalDAO(conexionBD);
+        ISucursalNegocio sucursalNegocio = new SucursalNegocio(sucursalDAO);       
+        
         IClienteNegocio clienteNegocio = new ClienteNegocio(clienteDAO);
         
-        frmLogin frmcrud = new frmLogin(clienteDAO, ciudadNegocio);
+        frmLogin frmcrud = new frmLogin(clienteDAO, ciudadNegocio, sucursalNegocio);
         frmcrud.show();
         
         System.out.println("Termina la ejecución");

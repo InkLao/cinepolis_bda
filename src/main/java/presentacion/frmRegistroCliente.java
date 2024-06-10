@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.ICiudadNegocio;
+import negocio.ISucursalNegocio;
 import negocio.NegocioException;
 import persistencia.ClienteDAO;
 import persistencia.ICiudadDAO;
@@ -23,15 +24,16 @@ import persistencia.PersistenciaException;
  *
  * @author santi
  */
-public class frmRegistro extends javax.swing.JFrame {
+public class frmRegistroCliente extends javax.swing.JFrame {
     
     IClienteDAO cliente;
     ICiudadNegocio ciudad;
+    ISucursalNegocio sucursal;
 
     /**
      * Creates new form frmLogin
      */
-    public frmRegistro(IClienteDAO cliente, ICiudadNegocio ciudad) {
+    public frmRegistroCliente(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         initComponents();
@@ -192,7 +194,7 @@ public class frmRegistro extends javax.swing.JFrame {
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
-        frmLogin x = new frmLogin(cliente, ciudad);
+        frmLogin x = new frmLogin(cliente, ciudad, sucursal);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed

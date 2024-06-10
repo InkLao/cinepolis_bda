@@ -5,7 +5,7 @@
 package negocio;
 
 import dtos.ciudadDTO;
-import entidad.Ciudad;
+import entidad.CiudadEntidad;
 import java.util.ArrayList;
 import java.util.List;
 import persistencia.ICiudadDAO;
@@ -26,7 +26,7 @@ public class CiudadNegocio implements ICiudadNegocio{
     @Override
     public List<ciudadDTO> buscarCiudadTabla() throws NegocioException {
          try {
-            List<Ciudad> Ciudad = this.ciudadDAO.buscarCiudadTabla();            
+            List<CiudadEntidad> Ciudad = this.ciudadDAO.buscarCiudadTabla();            
             return this.convertirCiudadTablaDTO(Ciudad);
         } catch (PersistenciaException ex) {
             // hacer uso de Logger
@@ -35,13 +35,13 @@ public class CiudadNegocio implements ICiudadNegocio{
         }
     }
     
-    private List<ciudadDTO> convertirCiudadTablaDTO(List<Ciudad> ciudades) throws NegocioException {
+    private List<ciudadDTO> convertirCiudadTablaDTO(List<CiudadEntidad> ciudades) throws NegocioException {
         if (ciudades == null) {
             throw new NegocioException("No se pudieron obtener los alumnos");
         }
 
         List<ciudadDTO> ciudadDTO = new ArrayList<>();
-        for (Ciudad ciudad : ciudades) {
+        for (CiudadEntidad ciudad : ciudades) {
             ciudadDTO dto = new ciudadDTO();
             dto.setIdCiudad(ciudad.getIdCiudad());
             dto.setNombre(ciudad.getNombre());

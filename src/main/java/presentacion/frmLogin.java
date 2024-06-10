@@ -5,6 +5,7 @@
 package presentacion;
 
 import negocio.ICiudadNegocio;
+import negocio.ISucursalNegocio;
 import persistencia.ClienteDAO;
 import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
@@ -17,12 +18,14 @@ public class frmLogin extends javax.swing.JFrame {
 
     private IClienteDAO cliente;
     private ICiudadNegocio ciudad;
+    private ISucursalNegocio sucursal;
     /**
      * Creates new form frmLogin
      */
-    public frmLogin(IClienteDAO cliente, ICiudadNegocio ciudad) {
+    public frmLogin(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal) {
         this.cliente = cliente;
         this.ciudad = ciudad;
+        this.sucursal = sucursal;
         initComponents();
     }
 
@@ -85,7 +88,8 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
-        frmIniciarSesion x = new frmIniciarSesion(cliente, ciudad);
+        ISucursalNegocio sucursal = this.sucursal;
+        frmIniciarSesion x = new frmIniciarSesion(cliente, ciudad, sucursal);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnIniciarSesiónActionPerformed
@@ -94,7 +98,9 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
-        frmRegistro x = new frmRegistro(cliente, ciudad);
+        ISucursalNegocio sucursal = this.sucursal;
+        
+        frmRegistroCliente x = new frmRegistroCliente(cliente, ciudad, sucursal);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed

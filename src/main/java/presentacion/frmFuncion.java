@@ -4,11 +4,13 @@
  */
 package presentacion;
 
+import dtos.SucursalDTO;
 import dtos.ciudadDTO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import negocio.ICiudadNegocio;
+import negocio.ISucursalNegocio;
 import negocio.NegocioException;
 import persistencia.ICiudadDAO;
 import persistencia.IClienteDAO;
@@ -21,11 +23,13 @@ public class frmFuncion extends javax.swing.JFrame {
 
     IClienteDAO cliente = this.cliente;
     ICiudadNegocio ciudad = this.ciudad;
+    ISucursalNegocio sucursal = this.sucursal;
     /**
      * Creates new form frmLogin
      */
-    public frmFuncion(ICiudadNegocio ciudadNegocio) {
+    public frmFuncion(ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio) {
         this.ciudad = ciudadNegocio;
+        this.sucursal = sucursalNegocio;
         initComponents();
         llenarBoxCiudades(buscarCiudadTabla());
     }
@@ -44,6 +48,20 @@ public class frmFuncion extends javax.swing.JFrame {
         return ciudadLista;
     }  
     
+    private List<SucursalDTO> buscarSucursalTabla() {
+        List<SucursalDTO> sucursalLista = null;
+        try {
+            
+            sucursalLista = this.sucursal.buscarSucursalTabla();
+
+
+        } catch (NegocioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return sucursalLista;
+    }      
+    
     private void llenarBoxCiudades(List<ciudadDTO> ciudadLista) {
         int i = 0;
         while (ciudadLista.size() > i) {
@@ -51,6 +69,14 @@ public class frmFuncion extends javax.swing.JFrame {
             i++;
         }
     }    
+    
+    private void llenarBoxSucursal(List<SucursalDTO> sucursalLista) {
+        int i = 0;
+        while (sucursalLista.size() > i) {
+            boxSucursal.addItem(sucursalLista.get(i).getNombre());
+            i++;
+        }
+    }      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,9 +122,12 @@ public class frmFuncion extends javax.swing.JFrame {
             }
         });
 
-        boxSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnACiudad.setText("Aceptar");
+        btnACiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnACiudadActionPerformed(evt);
+            }
+        });
 
         btnASucursal.setText("Aceptar");
 
@@ -191,7 +220,8 @@ public class frmFuncion extends javax.swing.JFrame {
         // TODO add your handling code here:
         IClienteDAO cliente = this.cliente;        
         ICiudadNegocio ciudad = this.ciudad;
-        frmLogin x = new frmLogin(cliente, ciudad);
+        ISucursalNegocio sucursal = this.sucursal;
+        frmLogin x = new frmLogin(cliente, ciudad, sucursal);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
@@ -206,6 +236,11 @@ public class frmFuncion extends javax.swing.JFrame {
     private void boxCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCiudadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boxCiudadActionPerformed
+
+    private void btnACiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnACiudadActionPerformed
+        // TODO add your handling code here:
+        llenarBoxSucursal(buscarSucursalTabla());
+    }//GEN-LAST:event_btnACiudadActionPerformed
 
 
 

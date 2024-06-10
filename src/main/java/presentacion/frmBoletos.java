@@ -5,6 +5,7 @@
 package presentacion;
 
 import negocio.ICiudadNegocio;
+import negocio.ISucursalNegocio;
 
 /**
  *
@@ -13,6 +14,7 @@ import negocio.ICiudadNegocio;
 public class frmBoletos extends javax.swing.JFrame {
 
      ICiudadNegocio ciudad = this.ciudad;
+     ISucursalNegocio sucursal = this.sucursal;
     /**
      * Creates new form frmLogin
      */
@@ -104,7 +106,8 @@ public class frmBoletos extends javax.swing.JFrame {
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         ICiudadNegocio ciudad = this.ciudad;
-        frmFuncion x = new frmFuncion(ciudad);
+        ISucursalNegocio sucursal = this.sucursal;
+        frmFuncion x = new frmFuncion(ciudad, sucursal);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed

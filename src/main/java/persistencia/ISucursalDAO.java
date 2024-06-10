@@ -2,25 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package negocio;
+package persistencia;
 
-import dtos.ciudadDTO;
-import entidad.CiudadEntidad;
-import java.sql.Connection;
+import entidad.SucursalEntidad;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-import persistencia.PersistenciaException;
 
 /**
  *
  * @author santi
  */
-public interface ICiudadNegocio {
+public interface ISucursalDAO {
     
-    List<ciudadDTO> buscarCiudadTabla() throws NegocioException;
-
+        public List<SucursalEntidad> buscarSucursalTabla() throws PersistenciaException;    
+    
+    public SucursalEntidad convertirAEntidad(ResultSet resultado) throws SQLException;    
     
 }

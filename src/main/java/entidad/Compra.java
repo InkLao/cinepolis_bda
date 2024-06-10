@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Compra {
     private int idCompra;
-    private Cliente cliente;
+    private ClienteEntidad cliente;
     private String pelicula;
     private Date fecha;
     private int numeroAsientos;
@@ -18,7 +18,7 @@ public class Compra {
     }
 
     public Compra(
-            Cliente cliente, 
+            ClienteEntidad cliente, 
             String pelicula, 
             Date fecha, 
             int numeroAsientos) {
@@ -30,7 +30,7 @@ public class Compra {
 
     public Compra(
             int idCompra, 
-            Cliente cliente, 
+            ClienteEntidad cliente, 
             String pelicula, 
             Date fecha, 
             int numeroAsientos) {
@@ -49,11 +49,11 @@ public class Compra {
         this.idCompra = idCompra;
     }
 
-    public Cliente getCliente() {
+    public ClienteEntidad getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(ClienteEntidad cliente) {
         this.cliente = cliente;
     }
 

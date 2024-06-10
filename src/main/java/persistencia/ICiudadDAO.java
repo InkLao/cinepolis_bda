@@ -4,7 +4,7 @@
  */
 package persistencia;
 
-import entidad.Ciudad;
+import entidad.CiudadEntidad;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ICiudadDAO {
     
-    List<Ciudad> buscarCiudadTabla() throws PersistenciaException;
+    List<CiudadEntidad> buscarCiudadTabla() throws PersistenciaException;
     
-    Ciudad convertirAEntidad(ResultSet resultado) throws SQLException;    
+    CiudadEntidad convertirAEntidad(ResultSet resultado) throws SQLException;    
 }

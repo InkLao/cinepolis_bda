@@ -6,7 +6,7 @@ package negocio;
 
 import dtos.registrarClienteDTO;
 import dtos.validarClienteDTO;
-import entidad.Cliente;
+import entidad.ClienteEntidad;
 import java.util.List;
 import persistencia.ClienteDAO;
 import persistencia.IClienteDAO;
@@ -47,12 +47,12 @@ public class ClienteNegocio implements IClienteNegocio{
     }
 
     @Override
-    public Cliente buscarClientePorId(int id) {
+    public ClienteEntidad buscarClientePorId(int id) {
         return clienteDAO.obtenerPorId(id);
     }
 
     @Override
-    public Cliente buscarClientePorEmail(String email) {
+    public ClienteEntidad buscarClientePorEmail(String email) {
         return clienteDAO.obtenerPorEmail(email);
     }
 }

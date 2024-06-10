@@ -6,7 +6,7 @@ package persistencia;
 
 import dtos.registrarClienteDTO;
 import dtos.validarClienteDTO;
-import entidad.Cliente;
+import entidad.ClienteEntidad;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ import negocio.NegocioException;
  */
 public class ClienteDAO implements IClienteDAO{
     
-    private List<Cliente> clientes = new ArrayList<>();
+    private List<ClienteEntidad> clientes = new ArrayList<>();
 
     private IConexionBD conexionBD;
 
@@ -78,8 +78,8 @@ public class ClienteDAO implements IClienteDAO{
     }
 
     @Override
-    public Cliente obtenerPorEmail(String email) {
-        for (Cliente cliente : clientes) {
+    public ClienteEntidad obtenerPorEmail(String email) {
+        for (ClienteEntidad cliente : clientes) {
             if (cliente.getEmail().equals(email)) {
                 return cliente;
             }
@@ -88,8 +88,8 @@ public class ClienteDAO implements IClienteDAO{
     }
 
     @Override
-    public Cliente obtenerPorId(int id) {
-        for (Cliente cliente : clientes) {
+    public ClienteEntidad obtenerPorId(int id) {
+        for (ClienteEntidad cliente : clientes) {
             if (cliente.getIdCliente()== id) {
                 return cliente;
             }
