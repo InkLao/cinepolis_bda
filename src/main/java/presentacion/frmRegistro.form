@@ -46,8 +46,8 @@
                   <Component id="fldContraseña" pref="147" max="32767" attributes="0"/>
                   <Component id="fldNombre" pref="147" max="32767" attributes="0"/>
                   <Component id="fldApellido" alignment="0" max="32767" attributes="0"/>
-                  <Component id="fldFecha" alignment="0" max="32767" attributes="0"/>
                   <Component id="cmbCiudad" max="32767" attributes="0"/>
+                  <Component id="fldFecha" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="189" max="32767" attributes="0"/>
           </Group>

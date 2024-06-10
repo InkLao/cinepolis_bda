@@ -147,8 +147,8 @@ public class frmRegistro extends javax.swing.JFrame {
                     .addComponent(fldContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addComponent(fldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addComponent(fldApellido)
-                    .addComponent(fldFecha)
-                    .addComponent(cmbCiudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbCiudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fldFecha))
                 .addContainerGap(189, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
