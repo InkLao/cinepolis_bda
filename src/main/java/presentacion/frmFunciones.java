@@ -6,10 +6,13 @@ package presentacion;
 
 import dtos.FuncionDTO;
 import dtos.PeliculaDTO;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import negocio.ICiudadNegocio;
@@ -32,6 +35,7 @@ public class frmFunciones extends javax.swing.JFrame {
      IPeliculaNegocio pelicula = this.pelicula;
      IClienteDAO cliente = this.cliente;
      IFuncionNegocio funcion = this.funcion;
+     String pelicula1 = null;
     /**
      * Creates new form frmLogin
      */
@@ -40,7 +44,8 @@ public class frmFunciones extends javax.swing.JFrame {
         this.ciudad = ciudadNegocio;
         this.sucursal = sucursalNegocio;
         this.pelicula = peliculaNegocio;        
-        this.funcion = funcionNegocio;        
+        this.funcion = funcionNegocio;      
+        this.pelicula1 = pelicula;
         initComponents();
         cargarConfiguracionInicialTablaFunciones();
         llenarTablaPeliculas(buscarFuncionesTabla(pelicula));
@@ -53,7 +58,7 @@ public class frmFunciones extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                
+               comprarBoleto(buscarFuncionesTabla(pelicula1)); 
                 
             }               
         };
@@ -78,7 +83,7 @@ public class frmFunciones extends javax.swing.JFrame {
         return funcionLista;
     }      
         
-    private void llenarTablaPeliculas(List<FuncionDTO> peliculasLista) {
+    private void llenarTablaPeliculas(List<FuncionDTO> funcionesLista) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblFuncion.getModel();
 
         if (modeloTabla.getRowCount() > 0) {
@@ -87,8 +92,8 @@ public class frmFunciones extends javax.swing.JFrame {
             }
         }
 
-        if (peliculasLista != null) {
-            peliculasLista.forEach(row -> {
+        if (funcionesLista != null) {
+            funcionesLista.forEach(row -> {
                 Object[] fila = new Object[7];
                 fila[0] = row.getTitulo();
                 fila[1] = row.getDuracion();
@@ -100,7 +105,30 @@ public class frmFunciones extends javax.swing.JFrame {
             });
         }
     }
-             
+       
+    private void comprarBoleto(List<FuncionDTO> funcionesLista){
+                    
+        IClienteDAO cliente = this.cliente;        
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        
+     
+
+  
+        int i = this.tblFuncion.getSelectedRow();
+
+        FuncionDTO fila = funcionesLista.get(i);
+        
+        
+        frmBoletos x = new frmBoletos(cliente, ciudad, sucursal, pelicula, funcion, fila);
+        x.setVisible(true);
+        setVisible(false);     
+     
+                
+        
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -147,22 +175,25 @@ public class frmFunciones extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnAtras))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(622, 622, 622)
-                        .addComponent(btnGuardar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnAtras))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(622, 622, 622)
+                                .addComponent(btnGuardar)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
                     .addComponent(btnGuardar))
