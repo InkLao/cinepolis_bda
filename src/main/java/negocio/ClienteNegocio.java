@@ -46,13 +46,24 @@ public class ClienteNegocio implements IClienteNegocio{
         }
     }
 
-    @Override
-    public ClienteEntidad buscarClientePorId(int id) {
-        return clienteDAO.obtenerPorId(id);
-    }
-
-    @Override
-    public ClienteEntidad buscarClientePorEmail(String email) {
-        return clienteDAO.obtenerPorEmail(email);
-    }
+    public int buscarIdCliente(validarClienteDTO cliente) throws NegocioException {
+                try {
+            return this.clienteDAO.buscarIdCliente(cliente);            
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }   
+    
+    public void comprarBoleto(int id) throws NegocioException {
+                try {
+            this.clienteDAO.comprarBoleto(id);            
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }   
+    
 }

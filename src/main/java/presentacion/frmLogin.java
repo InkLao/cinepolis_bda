@@ -44,6 +44,7 @@ public class frmLogin extends javax.swing.JFrame {
 
         btnIniciarSesión = new javax.swing.JButton();
         btnRegistro = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +62,9 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel1.setText("Cinépolis");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,13 +76,18 @@ public class frmLogin extends javax.swing.JFrame {
                         .addComponent(btnRegistro))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
-                        .addComponent(btnIniciarSesión)))
-                .addContainerGap(158, Short.MAX_VALUE))
+                        .addComponent(btnIniciarSesión))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel1)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addComponent(btnIniciarSesión)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistro)
@@ -118,5 +127,6 @@ public class frmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesión;
     private javax.swing.JButton btnRegistro;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,6 +15,10 @@ public class validarClienteDTO {
 
     public validarClienteDTO() {
     }
+    
+    public validarClienteDTO(String contraseña) {
+        this.contraseña = contraseña;
+    }    
 
     public validarClienteDTO(String email, String contraseña) {
         this.email = email;

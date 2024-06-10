@@ -51,6 +51,26 @@ public class ClienteDAO implements IClienteDAO{
         };
     }
     
+        @Override
+        public int buscarIdCliente(validarClienteDTO cliente) throws PersistenciaException {
+        try {
+
+            Connection conexion = this.conexionBD.crearConexion();
+            String codigoSQL = "select idCliente from clientes where ? = email and ? = contraseña";
+            PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+            preparedStatement.setString(1, cliente.getEmail());
+            preparedStatement.setString(2, cliente.getContraseña());
+            ResultSet resultado = preparedStatement.executeQuery();
+            int idCliente = resultado.getInt("idCliente");
+            conexion.close();
+            return idCliente;
+        } catch (SQLException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+        }
+    }
+    
     public boolean validarCliente(validarClienteDTO cliente) throws PersistenciaException{
     try{
         
@@ -77,24 +97,22 @@ public class ClienteDAO implements IClienteDAO{
     }
     }
 
-    @Override
-    public ClienteEntidad obtenerPorEmail(String email) {
-        for (ClienteEntidad cliente : clientes) {
-            if (cliente.getEmail().equals(email)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
+        @Override
+        public void comprarBoleto(int id) throws PersistenciaException {
+        try {
 
-    @Override
-    public ClienteEntidad obtenerPorId(int id) {
-        for (ClienteEntidad cliente : clientes) {
-            if (cliente.getIdCliente()== id) {
-                return cliente;
-            }
+            Connection conexion = this.conexionBD.crearConexion();
+            String codigoSQL = "insert into boletos (idCliente, idFuncion) values (?, 1)";
+            PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+
+            conexion.close();
+        } catch (SQLException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
         }
-        return null;
     }
     
 }

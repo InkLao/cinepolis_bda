@@ -15,6 +15,7 @@ import entidad.ClienteEntidad;
 public interface IClienteNegocio {
     void registrarCliente(registrarClienteDTO cliente) throws NegocioException;
     public boolean validarCliente(validarClienteDTO cliente) throws NegocioException;
-    ClienteEntidad buscarClientePorId(int id);
-    ClienteEntidad buscarClientePorEmail(String email);
+    public int buscarIdCliente(validarClienteDTO cliente) throws NegocioException;
+        public void comprarBoleto(int id) throws NegocioException ;
+            
 }

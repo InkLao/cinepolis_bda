@@ -19,8 +19,8 @@ public interface IClienteDAO {
     
     boolean validarCliente(validarClienteDTO cliente) throws PersistenciaException;
     
-    ClienteEntidad obtenerPorId(int id);
+    public int buscarIdCliente(validarClienteDTO cliente) throws PersistenciaException;
     
-    ClienteEntidad obtenerPorEmail(String email);
+            public void comprarBoleto(int id) throws PersistenciaException;
     
 }
