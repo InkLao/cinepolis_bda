@@ -37,8 +37,12 @@ public class frmLogin extends javax.swing.JFrame {
 
         btnIniciarSesión = new javax.swing.JButton();
         btnRegistro = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnIniciarSesión.setText("Iniciar Sesión");
         btnIniciarSesión.addActionListener(new java.awt.event.ActionListener() {
@@ -46,6 +50,7 @@ public class frmLogin extends javax.swing.JFrame {
                 btnIniciarSesiónActionPerformed(evt);
             }
         });
+        getContentPane().add(btnIniciarSesión, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, -1, -1));
 
         btnRegistro.setText("Registro");
         btnRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -53,30 +58,16 @@ public class frmLogin extends javax.swing.JFrame {
                 btnRegistroActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(btnRegistro))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(btnIniciarSesión)))
-                .addContainerGap(158, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
-                .addComponent(btnIniciarSesión)
-                .addGap(18, 18, 18)
-                .addComponent(btnRegistro)
-                .addGap(30, 30, 30))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utilerias/Cinépolis (1).png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 410, 110));
+
+        jLabel2.setText("Registrarte para tener diferentes beneficios en la pagina como poder ");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 370, 30));
+
+        jLabel3.setText("comprar boletos en línea, si ya tiene cuenta inicie sesión");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -103,5 +94,8 @@ public class frmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciarSesión;
     private javax.swing.JButton btnRegistro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
