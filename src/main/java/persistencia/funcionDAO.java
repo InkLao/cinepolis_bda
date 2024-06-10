@@ -35,7 +35,7 @@ public class funcionDAO implements IFuncionDAO{
             List<FuncionEntidad> sucursalLista = null;
 
             Connection conexion = this.conexionBD.crearConexion();
-            String codigoSQL = "select p.titulo, f.fecha_hora, f.disponibilidad, s.nombre, p.costo from peliculas p\n" +
+            String codigoSQL = "select p.titulo, f.fecha_hora, f.disponibilidad, s.nombre, p.costo, f.idFuncion from peliculas p\n" +
                                "inner join funciones f on p.idPelicula = f.idPelicula\n" +
                                "inner join salas s on s.idSala = f.idSala\n" +
                                "where ? = p.titulo;";
@@ -58,6 +58,32 @@ public class funcionDAO implements IFuncionDAO{
         }
     }
 
+        @Override
+        public int buscarIdFuncion(Timestamp fechahora, String nombre, String titulo) throws PersistenciaException {
+        try {
+
+            int idFuncion;    
+            Connection conexion = this.conexionBD.crearConexion();
+            String codigoSQL = "select idFuncion from funciones f\n" +
+                                "inner join salas s on s.idSala = f.idSala\n" +
+                                "inner join peliculas p on p.idPelicula = f.idPelicula\n" +
+                                "where ? = f.fecha_hora and ? = s.nombre and ? = p.titulo;";
+            PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+            preparedStatement.setTimestamp(1, fechahora);
+            preparedStatement.setString(2, nombre);
+            preparedStatement.setString(3, titulo);
+            ResultSet resultado = preparedStatement.executeQuery();
+            idFuncion = resultado.getInt("idFuncion");
+            
+            conexion.close();
+            return idFuncion;
+        } catch (SQLException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+        }
+    }        
+        
     @Override
     public FuncionEntidad convertirAEntidad(ResultSet resultado) throws SQLException {
         String titulo = resultado.getString("titulo");
@@ -65,7 +91,9 @@ public class funcionDAO implements IFuncionDAO{
         String sala = resultado.getString("nombre");
         int disponibilidad = resultado.getInt("disponibilidad");
         int costo = resultado.getInt("costo");
-        return new FuncionEntidad(titulo, duracion, disponibilidad, sala, costo);
+        int idFuncion = resultado.getInt("idFuncion");
+        return new FuncionEntidad(titulo, duracion, disponibilidad, sala, costo, idFuncion);
     }    
+    
     
 }

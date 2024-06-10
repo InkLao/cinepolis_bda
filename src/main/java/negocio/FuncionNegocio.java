@@ -6,6 +6,7 @@ package negocio;
 
 import dtos.FuncionDTO;
 import entidad.FuncionEntidad;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import persistencia.IFuncionDAO;
@@ -35,6 +36,18 @@ public class FuncionNegocio implements IFuncionNegocio{
         }
     }
     
+    public int buscarIdFuncion (Timestamp fechahora, String nombre, String titulo) throws NegocioException {
+      
+        try {
+            int idFuncion = this.funcionDAO.buscarIdFuncion(fechahora, nombre, titulo);
+            return idFuncion;
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }
+    
     public List<FuncionDTO> convertirFuncionesTablaDTO(List<FuncionEntidad> funciones) throws NegocioException {
         if (funciones == null) {
             throw new NegocioException("No se pudieron obtener las funciones");
@@ -48,6 +61,7 @@ public class FuncionNegocio implements IFuncionNegocio{
             dto.setAsientosdisponibles(funcion.getAsientosdisponibles());
             dto.setSala(funcion.getSala());
             dto.setPrecio(funcion.getPrecio());
+            dto.setIdFuncion(funcion.getIdFuncion());
             funcionDTO.add(dto);
         }
         return funcionDTO;

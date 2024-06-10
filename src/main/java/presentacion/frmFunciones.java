@@ -9,7 +9,10 @@ import dtos.PeliculaDTO;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -105,26 +108,29 @@ public class frmFunciones extends javax.swing.JFrame {
             });
         }
     }
+    
+        
+    private int buscarIdFuncion(Timestamp date, String nombre, String titulo) throws NegocioException{
+
+        int idFuncion;
+        return idFuncion = funcion.buscarIdFuncion(date, nombre, titulo);
+    }
+             
        
-    private void comprarBoleto(List<FuncionDTO> funcionesLista){
+    private void comprarBoleto(List<FuncionDTO> funcionesLista) {
                     
-        IClienteDAO cliente = this.cliente;        
-        ICiudadNegocio ciudad = this.ciudad;
-        ISucursalNegocio sucursal = this.sucursal;
-        IPeliculaNegocio pelicula = this.pelicula;
-        IFuncionNegocio funcion = this.funcion;
-        
-     
-
-  
+        IClienteDAO clientes = this.cliente;
+        ICiudadNegocio ciudads = this.ciudad;
+        ISucursalNegocio sucursals = this.sucursal;
+        IPeliculaNegocio peliculas = this.pelicula;
+        IFuncionNegocio funcions = this.funcion;
+        int idFuncion;
         int i = this.tblFuncion.getSelectedRow();
-
         FuncionDTO fila = funcionesLista.get(i);
-        
-        
-        frmBoletos x = new frmBoletos(cliente, ciudad, sucursal, pelicula, funcion, fila);
+        //idFuncion = buscarIdFuncion(fila.getDuracion(), fila.getSala(), fila.getTitulo());
+        frmBoletos x = new frmBoletos(clientes, ciudads, sucursals, peliculas, funcions, fila);
         x.setVisible(true);
-        setVisible(false);     
+        setVisible(false);
      
                 
         

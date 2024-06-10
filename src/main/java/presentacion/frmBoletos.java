@@ -39,6 +39,7 @@ public class frmBoletos extends javax.swing.JFrame {
      IClienteDAO cliente = this.cliente;
      IFuncionNegocio funcion = this.funcion;
      FuncionDTO row;
+     int idFuncion;
     /**
      * Creates new form frmLogin
      */
@@ -69,7 +70,12 @@ public class frmBoletos extends javax.swing.JFrame {
         ));
         
     }
-             
+
+    private void comprarBoletos() throws NegocioException, PersistenciaException{
+        
+        
+        this.cliente.comprarBoleto(row.getIdFuncion());
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,13 +91,6 @@ public class frmBoletos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBoleto = new javax.swing.JTable();
         fldTotal = new javax.swing.JTextField();
-        boxCantidad = new javax.swing.JComboBox<>();
-        btnCalcular = new javax.swing.JButton();
-        fldEmail = new javax.swing.JTextField();
-        fldContraseña = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,26 +123,6 @@ public class frmBoletos extends javax.swing.JFrame {
 
         fldTotal.setEditable(false);
 
-        boxCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Boleto", "2 Boletos", "3 Boletos", "4 Boletos", "5 Boletos", "6 Boletos", "7 Boletos", "8 Boletos", "9 Boletos", "10 Boletos" }));
-        boxCantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxCantidadActionPerformed(evt);
-            }
-        });
-
-        btnCalcular.setText("Calcular");
-        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalcularActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Contraseña");
-
-        jLabel2.setText("Email");
-
-        jLabel3.setText("*obligatorio*");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,34 +130,15 @@ public class frmBoletos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnAtras)
-                                .addGap(84, 84, 84)
-                                .addComponent(boxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCalcular)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(fldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(137, 137, 137))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fldEmail)
-                            .addComponent(fldContraseña)))
+                        .addContainerGap()
+                        .addComponent(btnAtras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(137, 137, 137)
+                        .addComponent(btnComprar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 16, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(13, 13, 13)))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -186,23 +146,11 @@ public class frmBoletos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fldContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
                     .addComponent(btnComprar)
-                    .addComponent(boxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCalcular))
+                    .addComponent(fldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -221,53 +169,25 @@ public class frmBoletos extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
-    private void boxCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCantidadActionPerformed
-        // TODO add your handling code here:
-  
-        
-    }//GEN-LAST:event_boxCantidadActionPerformed
-
-    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        // TODO add your handling code here:
-        int i = boxCantidad.getSelectedIndex();
-        i += 1;
-        
-        int precioaux = i * row.getPrecio();
-        String precio = "$".concat(String.valueOf(precioaux));
-        
-        
-        fldTotal.setText(precio);
-        
-    }//GEN-LAST:event_btnCalcularActionPerformed
-
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        // TODO add your handling code here:
-        String email = fldEmail.getText();
-        String contraseña =  fldContraseña.getText();
-                validarClienteDTO aux = new validarClienteDTO(email, contraseña);
-        for (int i = -1; i < boxCantidad.getSelectedIndex(); i++){ 
+
 
          try {
-             int idCliente = cliente.buscarIdCliente(aux);
-             cliente.comprarBoleto(idCliente);
+             comprarBoletos();
+         } catch (NegocioException ex) {
+             Logger.getLogger(frmBoletos.class.getName()).log(Level.SEVERE, null, ex);
          } catch (PersistenciaException ex) {
              Logger.getLogger(frmBoletos.class.getName()).log(Level.SEVERE, null, ex);
          }
-        }
+
+      
     }//GEN-LAST:event_btnComprarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> boxCantidad;
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnComprar;
-    private javax.swing.JTextField fldContraseña;
-    private javax.swing.JTextField fldEmail;
     private javax.swing.JTextField fldTotal;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBoleto;
     // End of variables declaration//GEN-END:variables
