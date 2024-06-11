@@ -4,7 +4,9 @@
  */
 package negocio;
 
+import dtos.ReportePeliculaDTO;
 import dtos.ReporteSucursalDTO;
+import entidad.ReportePeliculaEntidad;
 import entidad.ReporteSucursalEntidad;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -18,4 +20,7 @@ public interface IReporteNegocio {
  
         public List<ReporteSucursalDTO> buscarReporteSucursalTabla(Timestamp desde, Timestamp hasta) throws NegocioException ;
         public List<ReporteSucursalDTO> convertirReporteSucursalTablaDTO(List<ReporteSucursalEntidad> reportes) throws NegocioException ;
+            public List<ReportePeliculaDTO> buscarReportePeliculaTabla(Timestamp desde, Timestamp hasta) throws NegocioException ;
+                public List<ReportePeliculaDTO> convertirReportePeliculaTablaDTO(List<ReportePeliculaEntidad> reportes) throws NegocioException ;
+            
 }

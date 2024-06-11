@@ -178,7 +178,16 @@ public class frmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnRPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRPeliculasActionPerformed
-        // TODO add your handling code here:
+        IClienteNegocio cliente = this.cliente;
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        IReporteNegocio reporte = this.reporte;
+        
+        frmReportePelicula x = new frmReportePelicula(cliente, ciudad, sucursal, pelicula, funcion, reporte);
+        x.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_btnRPeliculasActionPerformed
 
     private void btnRSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRSucursalesActionPerformed

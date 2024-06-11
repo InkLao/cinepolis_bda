@@ -4,7 +4,6 @@
  */
 package presentacion;
 
-import dtos.ReporteSucursalDTO;
 import java.io.FileNotFoundException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,6 +19,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import dtos.ReportePeliculaDTO;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +29,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author santi
  */
-public class frmReporteSucursal extends javax.swing.JFrame {
+public class frmReportePelicula extends javax.swing.JFrame {
 
     private IClienteNegocio cliente;
     private ICiudadNegocio ciudad;
@@ -41,7 +41,7 @@ public class frmReporteSucursal extends javax.swing.JFrame {
     /**
      * Creates new form frmReporteSucursal
      */
-    public frmReporteSucursal(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion, IReporteNegocio reporte) {
+    public frmReportePelicula(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion, IReporteNegocio reporte) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
@@ -52,11 +52,11 @@ public class frmReporteSucursal extends javax.swing.JFrame {
     }
 
     
-    private List<ReporteSucursalDTO> buscarReporteSucursal(Timestamp desde, Timestamp hasta) {
-        List<ReporteSucursalDTO> reporteLista = null;
+    private List<ReportePeliculaDTO> buscarReportePelicula(Timestamp desde, Timestamp hasta) {
+        List<ReportePeliculaDTO> reporteLista = null;
         try {
             
-            reporteLista = this.reporte.buscarReporteSucursalTabla(desde, hasta);
+            reporteLista = this.reporte.buscarReportePeliculaTabla(desde, hasta);
 
 
         } catch (NegocioException ex) {
@@ -68,7 +68,7 @@ public class frmReporteSucursal extends javax.swing.JFrame {
 
     private void generarReporte(Timestamp desde, Timestamp hasta){
 
-        String dest = "reporteSucursal.pdf";
+        String dest = "reportePelicula.pdf";
 
         try {
 
@@ -77,20 +77,20 @@ public class frmReporteSucursal extends javax.swing.JFrame {
             Document document = new Document(pdfDoc);
 
 
-            document.add(new Paragraph("Reporte de ventas de las sucursales del siguiente periodo desde: " + desde.toString()+ " hasta: " + hasta.toString()));
+            document.add(new Paragraph("Reporte de ventas de las peliculas del siguiente periodo desde: " + desde.toString()+ " hasta: " + hasta.toString()));
 
 
-            List<ReporteSucursalDTO> lista = buscarReporteSucursal(desde, hasta);
-            float[] columnWidths = {200, 200, 200};
+            List<ReportePeliculaDTO> lista = buscarReportePelicula(desde, hasta);
+            float[] columnWidths = {200, 200, 200, 200};
             Table table = new Table(columnWidths);
 
             if (lista != null) {
                 lista.forEach(row -> {
 
-                String costo = "$" + row.getCosto();    
-                String cantidad = row.getCantidadBoletos()+ " boletos";    
-                table.addCell(row.getNombreSucursal());
-                table.addCell(cantidad);
+                String costo = "$" + row.getCosto();      
+                table.addCell(row.getNombreCiudad());
+                table.addCell(row.getTitulo());
+                table.addCell(row.getGenero());
                 table.addCell(costo);
 
 
@@ -135,7 +135,7 @@ public class frmReporteSucursal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Reporte Sucursales");
+        jLabel1.setText("Reporte Peliculas");
 
         jLabel2.setText("Desde");
 
@@ -144,6 +144,11 @@ public class frmReporteSucursal extends javax.swing.JFrame {
         fldFechaDesde.setText("YYYY-MM-DD HH:MM");
 
         fldFechaHasta.setText("YYYY-MM-DD HH:MM");
+        fldFechaHasta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fldFechaHastaActionPerformed(evt);
+            }
+        });
 
         btnAtras.setText("Atrás");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -229,6 +234,10 @@ public class frmReporteSucursal extends javax.swing.JFrame {
         
         generarReporte(desde, hasta);
     }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void fldFechaHastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fldFechaHastaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fldFechaHastaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

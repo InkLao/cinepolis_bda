@@ -4,6 +4,7 @@
  */
 package persistencia;
 
+import entidad.ReportePeliculaEntidad;
 import entidad.ReporteSucursalEntidad;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ import java.util.List;
 public interface IReporteDAO {
     
             public List<ReporteSucursalEntidad> buscarReporteSucursalTabla(Timestamp desde, Timestamp hasta) throws PersistenciaException ;
-                    public ReporteSucursalEntidad convertirAEntidad(ResultSet resultado) throws SQLException ;
-    
+            public ReporteSucursalEntidad convertirAEntidadSucursal(ResultSet resultado) throws SQLException ;
+            public List<ReportePeliculaEntidad> buscarReportePeliculaTabla(Timestamp desde, Timestamp hasta) throws PersistenciaException;
+            public ReportePeliculaEntidad convertirAEntidadPelicula(ResultSet resultado) throws SQLException;
 }

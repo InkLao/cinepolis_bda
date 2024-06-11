@@ -48,8 +48,6 @@ public class ReporteSucursalEntidad {
 
     public void setCosto(int costo) {
         this.costo = costo;
-    }
-    
-    
+    }   
     
 }

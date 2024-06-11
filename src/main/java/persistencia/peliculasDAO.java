@@ -33,7 +33,7 @@ public class peliculasDAO implements IPeliculasDAO{
             List<PeliculaEntidad> sucursalLista = null;
 
             Connection conexion = this.conexionBD.crearConexion();
-            String codigoSQL = "select titulo, clasificacion, g.nombre as 'genero', duracion, pa.nombre as 'pais', link_trailer, sinopsis  from peliculas p\n" +
+            String codigoSQL = "select distinct titulo, clasificacion, g.nombre as 'genero', duracion, pa.nombre as 'pais', link_trailer, sinopsis  from peliculas p\n" +
                                 "inner join paises pa on pa.idPais = p.idPais\n" +
                                 "inner join generos_a_peliculas gp on gp.idPelicula = p.idPelicula\n" +
                                 "inner join generos g on g.idGenero = gp.idGenero\n" +

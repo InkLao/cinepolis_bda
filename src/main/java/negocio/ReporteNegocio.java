@@ -4,18 +4,14 @@
  */
 package negocio;
 
+import dtos.ReportePeliculaDTO;
 import dtos.ReporteSucursalDTO;
-import dtos.SucursalDTO;
-import dtos.ciudadDTO;
-import entidad.CiudadEntidad;
+import entidad.ReportePeliculaEntidad;
 import entidad.ReporteSucursalEntidad;
-import entidad.SucursalEntidad;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import persistencia.IReporteDAO;
-import persistencia.ISucursalDAO;
 import persistencia.PersistenciaException;
 
 /**
@@ -58,4 +54,32 @@ public class ReporteNegocio implements IReporteNegocio{
         return reporteDTO;
     }    
     
+    @Override
+    public List<ReportePeliculaDTO> buscarReportePeliculaTabla(Timestamp desde, Timestamp hasta) throws NegocioException {
+         try {
+            List<ReportePeliculaEntidad> reportes = this.reporteDAO.buscarReportePeliculaTabla(desde, hasta);            
+            return this.convertirReportePeliculaTablaDTO(reportes);
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }    
+    
+    public List<ReportePeliculaDTO> convertirReportePeliculaTablaDTO(List<ReportePeliculaEntidad> reportes) throws NegocioException {
+        if (reportes == null) {
+            throw new NegocioException("No se pudieron obtener las peliculas");
+        }
+
+        List<ReportePeliculaDTO> reporteDTO = new ArrayList<>();
+        for (ReportePeliculaEntidad reporte : reportes) {
+            ReportePeliculaDTO dto = new ReportePeliculaDTO();
+            dto.setCosto(reporte.getCosto());
+            dto.setNombreCiudad(reporte.getNombreCiudad());
+            dto.setTitulo(reporte.getTitulo());
+            dto.setGenero(reporte.getGenero());
+            reporteDTO.add(dto);
+        }
+        return reporteDTO;
+    }      
 }
