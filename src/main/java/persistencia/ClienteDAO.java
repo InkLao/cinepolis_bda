@@ -36,7 +36,7 @@ public class ClienteDAO implements IClienteDAO{
         try{
                         
             Connection conexion = this.conexionBD.crearConexion();
-            String codigoSQL = "insert into clientes (nombre,apellido,email, contraseña, fecha_nacimiento, idCiudad) values (?,?,?,?,?,?);";
+            String codigoSQL = "insert into clientes (nombre,apellido,email, contraseña, fecha_nacimiento, idCiudad) values (?,?,?,?,?,?); ";
             PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
             preparedStatement.setString(1, cliente.getNombre());
             preparedStatement.setString(2, cliente.getApellido());
@@ -45,6 +45,7 @@ public class ClienteDAO implements IClienteDAO{
             preparedStatement.setDate(5, cliente.getFechaNacimiento());
             preparedStatement.setInt(6, cliente.getIdCiudad());
             preparedStatement.execute();
+            conexion.commit();
             conexion.close();
         }catch (SQLException ex) {
             System.out.println(ex.getMessage());
