@@ -9,9 +9,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.ICiudadNegocio;
+import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
+import negocio.NegocioException;
 import persistencia.IClienteDAO;
 import persistencia.PersistenciaException;
 
@@ -21,7 +23,7 @@ import persistencia.PersistenciaException;
  */
 public class frmIniciarSesion extends javax.swing.JFrame {
 
-    IClienteDAO cliente = this.cliente;    
+    IClienteNegocio cliente;    
     ICiudadNegocio ciudad = this.ciudad;
     ISucursalNegocio sucursal = this.sucursal;
     IPeliculaNegocio pelicula = this.pelicula;
@@ -29,7 +31,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
     /**
      * Creates new form frmLogin
      */
-    public frmIniciarSesion(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
+    public frmIniciarSesion(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
@@ -39,7 +41,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
     }
 
         
-    private boolean validarCliente(validarClienteDTO cliente) throws PersistenciaException{
+    private boolean validarCliente(validarClienteDTO cliente) throws NegocioException{
 
     return this.cliente.validarCliente(cliente);
 
@@ -127,7 +129,7 @@ public class frmIniciarSesion extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        IClienteDAO cliente = this.cliente;
+        IClienteNegocio cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
@@ -138,25 +140,25 @@ public class frmIniciarSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-        IClienteDAO cliente = this.cliente;
-        ICiudadNegocio ciudad = this.ciudad;
-        ISucursalNegocio sucursal = this.sucursal;
-        IPeliculaNegocio pelicula = this.pelicula;
-        IFuncionNegocio funcion = this.funcion;
-        
-        String val1 = fldCorreo.getText();
-        String val2 = fldContraseña.getText(); 
-        validarClienteDTO clienteAV = new validarClienteDTO(val1, val2);        
         try {
+            // TODO add your handling code here:
+            IClienteNegocio cliente = this.cliente;
+            ICiudadNegocio ciudad = this.ciudad;
+            ISucursalNegocio sucursal = this.sucursal;
+            IPeliculaNegocio pelicula = this.pelicula;
+            IFuncionNegocio funcion = this.funcion; 
+            
+            String val1 = fldCorreo.getText();
+            String val2 = fldContraseña.getText();
+            validarClienteDTO clienteAV = new validarClienteDTO(val1, val2);
             if (validarCliente(clienteAV) == true){
                 
                 JOptionPane.showMessageDialog(this, "Sesión Iniciada");
                 frmCartelera x = new frmCartelera(cliente,ciudad, sucursal, pelicula, funcion);
                 x.setVisible(true);
                 setVisible(false);
-            } else JOptionPane.showMessageDialog(this, "Datos de inicio de sesión inexistentes");        
-        } catch (PersistenciaException ex) {
+            } else JOptionPane.showMessageDialog(this, "Datos de inicio de sesión inexistentes");
+        } catch (NegocioException ex) {
             Logger.getLogger(frmIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
 

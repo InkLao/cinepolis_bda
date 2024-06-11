@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import negocio.ICiudadNegocio;
+import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
@@ -36,14 +37,14 @@ public class frmBoletos extends javax.swing.JFrame {
      ICiudadNegocio ciudad = this.ciudad;
      ISucursalNegocio sucursal = this.sucursal;
      IPeliculaNegocio pelicula = this.pelicula;
-     IClienteDAO cliente = this.cliente;
+     IClienteNegocio cliente = this.cliente;
      IFuncionNegocio funcion = this.funcion;
      FuncionDTO row;
      int idFuncion;
     /**
      * Creates new form frmLogin
      */
-    public frmBoletos(IClienteDAO cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio, FuncionDTO fila) {
+    public frmBoletos(IClienteNegocio cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio, FuncionDTO fila) {
         this.cliente = cliente;
         this.ciudad = ciudadNegocio;
         this.sucursal = sucursalNegocio;
@@ -162,7 +163,7 @@ public class frmBoletos extends javax.swing.JFrame {
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
-        IClienteDAO cliente =this.cliente;
+        IClienteNegocio cliente =this.cliente;
         IFuncionNegocio funcion = this.funcion;
         frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion);
         x.setVisible(true);
@@ -174,7 +175,7 @@ public class frmBoletos extends javax.swing.JFrame {
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
-        IClienteDAO cliente =this.cliente;
+        IClienteNegocio cliente =this.cliente;
         IFuncionNegocio funcion = this.funcion;
 
         

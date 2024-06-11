@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import negocio.ICiudadNegocio;
+import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
 import negocio.NegocioException;
 import utilerias.JButtonRenderer;
-import persistencia.IClienteDAO;
 import utilerias.JButtonCellEditor;
 
 /**
@@ -28,7 +28,7 @@ import utilerias.JButtonCellEditor;
  */
 public class frmCartelera extends javax.swing.JFrame {
 
-    IClienteDAO cliente = this.cliente;
+    IClienteNegocio cliente;
     ICiudadNegocio ciudad = this.ciudad;
     ISucursalNegocio sucursal = this.sucursal;
     IPeliculaNegocio pelicula = this.pelicula;
@@ -36,7 +36,7 @@ public class frmCartelera extends javax.swing.JFrame {
     /**
      * Creates new form frmLogin
      */
-    public frmCartelera(IClienteDAO cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcion) {
+    public frmCartelera(IClienteNegocio cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcion) {
         this.cliente = cliente;
         this.ciudad = ciudadNegocio;
         this.sucursal = sucursalNegocio;
@@ -80,7 +80,7 @@ public class frmCartelera extends javax.swing.JFrame {
     
     private void funcionesPelicula(){
                     
-        IClienteDAO cliente = this.cliente;        
+        IClienteNegocio cliente = this.cliente;        
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
@@ -271,7 +271,7 @@ public class frmCartelera extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        IClienteDAO cliente = this.cliente;        
+        IClienteNegocio cliente = this.cliente;        
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;

@@ -5,20 +5,14 @@
 package presentacion;
 
 import dtos.FuncionDTO;
-import dtos.PeliculaDTO;
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import negocio.ICiudadNegocio;
+import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
@@ -36,14 +30,14 @@ public class frmFunciones extends javax.swing.JFrame {
      ICiudadNegocio ciudad = this.ciudad;
      ISucursalNegocio sucursal = this.sucursal;
      IPeliculaNegocio pelicula = this.pelicula;
-     IClienteDAO cliente = this.cliente;
+     IClienteNegocio cliente = this.cliente;
      IFuncionNegocio funcion = this.funcion;
      String pelicula1 = null;
      String nSala = null;
     /**
      * Creates new form frmLogin
      */
-    public frmFunciones(IClienteDAO cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio, String pelicula, String nSala) {
+    public frmFunciones(IClienteNegocio cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio, String pelicula, String nSala) {
         this.cliente = cliente;
         this.ciudad = ciudadNegocio;
         this.sucursal = sucursalNegocio;
@@ -116,7 +110,7 @@ public class frmFunciones extends javax.swing.JFrame {
        
     private void comprarBoleto(List<FuncionDTO> funcionesLista) {
                     
-        IClienteDAO clientes = this.cliente;
+        IClienteNegocio clientes = this.cliente;
         ICiudadNegocio ciudads = this.ciudad;
         ISucursalNegocio sucursals = this.sucursal;
         IPeliculaNegocio peliculas = this.pelicula;
@@ -210,7 +204,7 @@ public class frmFunciones extends javax.swing.JFrame {
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
-        IClienteDAO cliente =this.cliente;
+        IClienteNegocio cliente =this.cliente;
         IFuncionNegocio funcion = this.funcion;
         frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion);
         x.setVisible(true);

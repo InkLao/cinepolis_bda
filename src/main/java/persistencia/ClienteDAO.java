@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import negocio.NegocioException;
+import java.time.LocalTime;
 
 /**
  *
@@ -114,5 +114,44 @@ public class ClienteDAO implements IClienteDAO{
             throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
         }
     }
+        
+        @Override
+        public List<ClienteEntidad> buscarClientesTabla() throws PersistenciaException {
+        try {
+            List<ClienteEntidad> clienteLista = null;
+
+            Connection conexion = this.conexionBD.crearConexion();
+            String codigoSQL = "Select idCliente,cl.nombre,apellido,contraseña,fecha_nacimiento,email,c.nombre as nc \n" +
+                            "from clientes cl\n" +
+                            "left join ciudades c on cl.idCiudad = c.idCiudad;";
+            PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+            ResultSet resultado = preparedStatement.executeQuery();
+            while (resultado.next()) {
+                if (clienteLista == null) {
+                    clienteLista = new ArrayList<>();
+                }
+                ClienteEntidad cliente = this.convertirAEntidad(resultado);
+                clienteLista.add(cliente);
+            }
+            conexion.close();
+            return clienteLista;
+        } catch (SQLException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+        }
+      
+    }
     
+        @Override
+        public ClienteEntidad convertirAEntidad(ResultSet resultado) throws SQLException {
+            int idCliente = resultado.getInt("idCliente");
+            String nombre = resultado.getString("nombre");
+            String apellido = resultado.getString("apellido");
+            LocalTime fn = resultado.getTime("fecha_nacimiento").toLocalTime();
+            String contraseña = resultado.getString("contraseña");
+            String email = resultado.getString("email");
+            String nc = resultado.getString("nc");
+            return new ClienteEntidad(idCliente, nombre, apellido, fn, contraseña, email, nc);
+    }  
 }

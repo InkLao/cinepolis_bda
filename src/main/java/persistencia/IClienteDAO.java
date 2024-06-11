@@ -7,6 +7,9 @@ package persistencia;
 import dtos.registrarClienteDTO;
 import dtos.validarClienteDTO;
 import entidad.ClienteEntidad;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import negocio.NegocioException;
 
 /**
@@ -22,5 +25,9 @@ public interface IClienteDAO {
     public int buscarIdCliente(validarClienteDTO cliente) throws PersistenciaException;
     
     public void comprarBoleto(int id) throws PersistenciaException;
+    
+    public List<ClienteEntidad> buscarClientesTabla() throws PersistenciaException;
+
+    public ClienteEntidad convertirAEntidad(ResultSet resultado) throws SQLException ;
     
 }

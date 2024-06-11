@@ -39,14 +39,13 @@ public class Cinepolis_bda {
         IConexionBD conexionBD = new ConexionBD();
         
         IClienteDAO clienteDAO =  new ClienteDAO(conexionBD);
+        IClienteNegocio clienteNegocio = new ClienteNegocio(clienteDAO);        
         
         ICiudadDAO ciudadDAO = new CiudadDAO(conexionBD);
         ICiudadNegocio ciudadNegocio = new CiudadNegocio(ciudadDAO);
         
         ISucursalDAO sucursalDAO = new SucursalDAO(conexionBD);
-        ISucursalNegocio sucursalNegocio = new SucursalNegocio(sucursalDAO);       
-        
-        IClienteNegocio clienteNegocio = new ClienteNegocio(clienteDAO);
+        ISucursalNegocio sucursalNegocio = new SucursalNegocio(sucursalDAO);
         
         IPeliculasDAO peliculaDAO = new peliculasDAO(conexionBD);
         IPeliculaNegocio peliculaNegocio = new PeliculaNegocio(peliculaDAO);       
@@ -54,7 +53,7 @@ public class Cinepolis_bda {
         IFuncionDAO funcionDAO = new funcionDAO(conexionBD);
         IFuncionNegocio funcionNegocio = new FuncionNegocio(funcionDAO);               
         
-        frmLogin frmcrud = new frmLogin(clienteDAO, ciudadNegocio, sucursalNegocio, peliculaNegocio, funcionNegocio);
+        frmLogin frmcrud = new frmLogin(clienteNegocio, ciudadNegocio, sucursalNegocio, peliculaNegocio, funcionNegocio);
         frmcrud.show();
         
         System.out.println("Termina la ejecución");

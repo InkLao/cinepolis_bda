@@ -9,11 +9,15 @@ import dtos.validarClienteDTO;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.ICiudadNegocio;
+import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
+import negocio.NegocioException;
 import persistencia.IClienteDAO;
 import persistencia.PersistenciaException;
 
@@ -23,7 +27,7 @@ import persistencia.PersistenciaException;
  */
 public class frmRegistroCliente extends javax.swing.JFrame {
     
-    IClienteDAO cliente;
+    IClienteNegocio cliente;
     ICiudadNegocio ciudad;
     ISucursalNegocio sucursal;
     IPeliculaNegocio pelicula;
@@ -33,7 +37,7 @@ public class frmRegistroCliente extends javax.swing.JFrame {
     /**
      * Creates new form frmLogin
      */
-    public frmRegistroCliente(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
+    public frmRegistroCliente(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
@@ -42,15 +46,15 @@ public class frmRegistroCliente extends javax.swing.JFrame {
         initComponents();
     }
 
-    private void registrarCliente(registrarClienteDTO cliente) throws PersistenciaException{
+    private void registrarCliente(registrarClienteDTO cliente) throws NegocioException{
         try{
         this.cliente.registrarCliente(cliente);
-        } catch (PersistenciaException ex) {
+        } catch (NegocioException ex) {
         JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
         }
     }  
     
-    private boolean validarCliente(validarClienteDTO cliente) throws PersistenciaException{
+    private boolean validarCliente(validarClienteDTO cliente) throws NegocioException{
 
         return this.cliente.validarCliente(cliente);
 
@@ -195,7 +199,7 @@ public class frmRegistroCliente extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        IClienteDAO cliente = this.cliente;
+        IClienteNegocio cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         IPeliculaNegocio pelicula = this.pelicula;
         IFuncionNegocio funcion = this.funcion;
@@ -206,23 +210,23 @@ public class frmRegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-        try{
-        String val1 = fldNombre.getText();
-        String val2 = fldApellido.getText();
-        String val3 = fldCorreo.getText();
-        String val4 = fldContraseña.getText();
-        String dateAux = fldFecha.getText();
-        Date val5 = getSQLDate(dateAux);
-        int val6 = 1;
-        validarClienteDTO clienteAV = new validarClienteDTO(val3, val4);
-        registrarClienteDTO cliente = new registrarClienteDTO(val1, val2, val3, val4, val5, val6);
-        if (validarCliente(clienteAV) != true){
-        registrarCliente(cliente);
-        JOptionPane.showMessageDialog(this, "Cliente agregado correctamente");
-        } else JOptionPane.showMessageDialog(this, "El cliente ya existe!");
-        } catch (PersistenciaException ex) {
-        JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
+        try {
+            // TODO add your handling code here:
+            String val1 = fldNombre.getText();
+            String val2 = fldApellido.getText();
+            String val3 = fldCorreo.getText();
+            String val4 = fldContraseña.getText();
+            String dateAux = fldFecha.getText();
+            Date val5 = getSQLDate(dateAux);
+            int val6 = 1;
+            validarClienteDTO clienteAV = new validarClienteDTO(val3, val4);
+            registrarClienteDTO cliente = new registrarClienteDTO(val1, val2, val3, val4, val5, val6);
+            if (validarCliente(clienteAV) != true){
+                registrarCliente(cliente);
+                JOptionPane.showMessageDialog(this, "Cliente agregado correctamente");
+            } else JOptionPane.showMessageDialog(this, "El cliente ya existe!");
+        } catch (NegocioException ex) {
+            Logger.getLogger(frmRegistroCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed

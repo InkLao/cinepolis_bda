@@ -5,6 +5,7 @@
 package presentacion;
 
 import negocio.ICiudadNegocio;
+import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
 import negocio.ISucursalNegocio;
@@ -16,7 +17,7 @@ import persistencia.IClienteDAO;
  */
 public class frmLogin extends javax.swing.JFrame {
 
-    private IClienteDAO cliente;
+    private IClienteNegocio cliente;
     private ICiudadNegocio ciudad;
     private ISucursalNegocio sucursal;
     private IPeliculaNegocio pelicula;
@@ -24,7 +25,7 @@ public class frmLogin extends javax.swing.JFrame {
     /**
      * Creates new form frmLogin
      */
-    public frmLogin(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
+    public frmLogin(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
@@ -46,6 +47,7 @@ public class frmLogin extends javax.swing.JFrame {
         btnRegistro = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +70,13 @@ public class frmLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Módulo Administrativo");
 
+        btnClientes.setText("CatálogoClientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,7 +94,10 @@ public class frmLogin extends javax.swing.JFrame {
                         .addComponent(btnIniciarSesión))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnClientes)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -93,7 +105,9 @@ public class frmLogin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addComponent(btnClientes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnIniciarSesión)
@@ -107,7 +121,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnIniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesiónActionPerformed
         // TODO add your handling code here:
-        IClienteDAO cliente = this.cliente;
+        IClienteNegocio cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
@@ -120,7 +134,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // TODO add your handling code here:
-        IClienteDAO cliente = this.cliente;
+        IClienteNegocio cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
@@ -131,8 +145,22 @@ public class frmLogin extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed
 
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        // TODO add your handling code here:
+        IClienteNegocio cliente = this.cliente;
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        
+        frmClientes x = new frmClientes(cliente, ciudad, sucursal, pelicula, funcion);
+        x.setVisible(true);
+        setVisible(false);        
+    }//GEN-LAST:event_btnClientesActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnIniciarSesión;
     private javax.swing.JButton btnRegistro;
     private javax.swing.JLabel jLabel1;
