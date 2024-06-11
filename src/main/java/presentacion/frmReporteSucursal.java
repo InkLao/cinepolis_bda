@@ -67,9 +67,8 @@ public class frmReporteSucursal extends javax.swing.JFrame {
     }      
 
     private void generarReporte(Timestamp desde, Timestamp hasta){
-        String userHome = System.getProperty("user.home");
-        String desktopDirectory = userHome + "\\Desktop";
-        String dest = desktopDirectory + "\\reporte.pdf";
+
+        String dest = "reporte.pdf";
 
         try {
 
