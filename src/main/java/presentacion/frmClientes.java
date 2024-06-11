@@ -13,6 +13,7 @@ import negocio.ICiudadNegocio;
 import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
+import negocio.IReporteNegocio;
 import negocio.ISucursalNegocio;
 import negocio.NegocioException;
 import persistencia.IClienteDAO;
@@ -27,18 +28,20 @@ public class frmClientes extends javax.swing.JFrame {
     /**
      * Creates new form frmClientes
      */
-    private IClienteNegocio cliente;
-    private ICiudadNegocio ciudad;
-    private ISucursalNegocio sucursal;
-    private IPeliculaNegocio pelicula;
-    private IFuncionNegocio funcion;    
+    IClienteNegocio cliente;
+    ICiudadNegocio ciudad;
+    ISucursalNegocio sucursal;
+    IPeliculaNegocio pelicula;
+    IFuncionNegocio funcion;   
+    IReporteNegocio reporte;
     
-    public frmClientes(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
+    public frmClientes(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion, IReporteNegocio reporte) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
         this.pelicula = pelicula;
         this.funcion = funcion;        
+        this.reporte = reporte;        
         initComponents();
         llenarTablaClientes(buscarClientesTabla());
     }
@@ -147,8 +150,9 @@ public class frmClientes extends javax.swing.JFrame {
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
         IFuncionNegocio funcion = this.funcion;
+        IReporteNegocio reporte = this.reporte;
         
-        frmLogin x = new frmLogin(cliente, ciudad, sucursal, pelicula, funcion);
+        frmLogin x = new frmLogin(cliente, ciudad, sucursal, pelicula, funcion, reporte);
         x.setVisible(true);
         setVisible(false);        
     }//GEN-LAST:event_btnRegresarActionPerformed

@@ -11,8 +11,10 @@ import negocio.ICiudadNegocio;
 import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
+import negocio.IReporteNegocio;
 import negocio.ISucursalNegocio;
 import negocio.PeliculaNegocio;
+import negocio.ReporteNegocio;
 import negocio.SucursalNegocio;
 import persistencia.CiudadDAO;
 import persistencia.ClienteDAO;
@@ -22,7 +24,9 @@ import persistencia.IClienteDAO;
 import persistencia.IConexionBD;
 import persistencia.IFuncionDAO;
 import persistencia.IPeliculasDAO;
+import persistencia.IReporteDAO;
 import persistencia.ISucursalDAO;
+import persistencia.ReporteDAO;
 import persistencia.SucursalDAO;
 import persistencia.funcionDAO;
 import persistencia.peliculasDAO;
@@ -51,9 +55,12 @@ public class Cinepolis_bda {
         IPeliculaNegocio peliculaNegocio = new PeliculaNegocio(peliculaDAO);       
                
         IFuncionDAO funcionDAO = new funcionDAO(conexionBD);
-        IFuncionNegocio funcionNegocio = new FuncionNegocio(funcionDAO);               
+        IFuncionNegocio funcionNegocio = new FuncionNegocio(funcionDAO);     
         
-        frmLogin frmcrud = new frmLogin(clienteNegocio, ciudadNegocio, sucursalNegocio, peliculaNegocio, funcionNegocio);
+        IReporteDAO reporteDAO = new ReporteDAO(conexionBD);
+        IReporteNegocio reporteNegocio = new ReporteNegocio(reporteDAO);
+        
+        frmLogin frmcrud = new frmLogin(clienteNegocio, ciudadNegocio, sucursalNegocio, peliculaNegocio, funcionNegocio, reporteNegocio);
         frmcrud.show();
         
         System.out.println("Termina la ejecución");

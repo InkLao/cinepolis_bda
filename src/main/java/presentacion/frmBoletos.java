@@ -5,28 +5,17 @@
 package presentacion;
 
 import dtos.FuncionDTO;
-import dtos.PeliculaDTO;
-import dtos.validarClienteDTO;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
 import negocio.ICiudadNegocio;
 import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
+import negocio.IReporteNegocio;
 import negocio.ISucursalNegocio;
 import negocio.NegocioException;
-import persistencia.IClienteDAO;
-import persistencia.PersistenciaException;
-import utilerias.JButtonCellEditor;
-import utilerias.JButtonRenderer;
+
 
 /**
  *
@@ -39,17 +28,19 @@ public class frmBoletos extends javax.swing.JFrame {
      IPeliculaNegocio pelicula = this.pelicula;
      IClienteNegocio cliente = this.cliente;
      IFuncionNegocio funcion = this.funcion;
+     IReporteNegocio reporte = this.reporte;
      FuncionDTO row;
      int idFuncion;
     /**
      * Creates new form frmLogin
      */
-    public frmBoletos(IClienteNegocio cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio, FuncionDTO fila) {
+    public frmBoletos(IClienteNegocio cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio, IReporteNegocio reporte, FuncionDTO fila) {
         this.cliente = cliente;
         this.ciudad = ciudadNegocio;
         this.sucursal = sucursalNegocio;
         this.pelicula = peliculaNegocio;        
         this.funcion = funcionNegocio;        
+        this.reporte = reporte;        
         this.row = fila;
         initComponents();
         llenarTablaBoleto(fila);
@@ -93,6 +84,8 @@ public class frmBoletos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBoleto = new javax.swing.JTable();
         boxCantidad = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,6 +118,11 @@ public class frmBoletos extends javax.swing.JFrame {
 
         boxCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Boleto", "2 Boletos", "3 Boletos", "4 Boletos", "5 Boletos", "6 Boletos", "7 Boletos", "8 Boletos", "9 Boletos", "10 Boletos" }));
 
+        jLabel1.setText("Selecciona la cantidad de boletos");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel2.setText("Compra de boletos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,23 +130,33 @@ public class frmBoletos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 16, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnAtras)
-                        .addGap(220, 220, 220)
-                        .addComponent(boxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(165, 165, 165)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(boxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnComprar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 16, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnComprar)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(187, 187, 187))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
                     .addComponent(btnComprar)
@@ -166,7 +174,8 @@ public class frmBoletos extends javax.swing.JFrame {
         IPeliculaNegocio pelicula = this.pelicula;
         IClienteNegocio cliente =this.cliente;
         IFuncionNegocio funcion = this.funcion;
-        frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion);
+        IReporteNegocio reporte = this.reporte;
+        frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion, reporte);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
@@ -178,13 +187,12 @@ public class frmBoletos extends javax.swing.JFrame {
         IPeliculaNegocio pelicula = this.pelicula;
         IClienteNegocio cliente =this.cliente;
         IFuncionNegocio funcion = this.funcion;
-        
-
+        IReporteNegocio reporte = this.reporte;
 
          try {
              comprarBoletos();
         JOptionPane.showMessageDialog(this, "Boleto comprado correctamente!");
-        frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion);
+        frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion, reporte);
         x.setVisible(true);
         setVisible(false);
          } catch (NegocioException ex) {
@@ -201,6 +209,8 @@ public class frmBoletos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> boxCantidad;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnComprar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBoleto;
     // End of variables declaration//GEN-END:variables
