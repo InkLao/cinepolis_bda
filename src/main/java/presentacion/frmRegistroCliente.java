@@ -4,11 +4,13 @@
  */
 package presentacion;
 
+import dtos.ciudadDTO;
 import dtos.registrarClienteDTO;
 import dtos.validarClienteDTO;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,7 +45,9 @@ public class frmRegistroCliente extends javax.swing.JFrame {
         this.sucursal = sucursal;
         this.pelicula = pelicula;
         this.funcion = funcion;
+
         initComponents();
+        llenarBoxCiudades(buscarCiudadTabla());        
     }
 
     private void registrarCliente(registrarClienteDTO cliente) throws NegocioException{
@@ -58,7 +62,30 @@ public class frmRegistroCliente extends javax.swing.JFrame {
 
         return this.cliente.validarCliente(cliente);
 
-    }        
+    }
+    
+    private void llenarBoxCiudades(List<ciudadDTO> ciudadLista) {
+        int i = 0;
+        while (ciudadLista.size() > i) {
+            boxCiudades.addItem(ciudadLista.get(i).getNombre());
+            i++;
+        }
+    }    
+       
+    private List<ciudadDTO> buscarCiudadTabla() {
+        List<ciudadDTO> ciudadLista = null;
+        try {
+            
+            ciudadLista = this.ciudad.buscarCiudadTabla();
+
+
+        } catch (NegocioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return ciudadLista;
+    }  
+    
     
     private static java.sql.Date getSQLDate(String dateText) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -97,7 +124,7 @@ public class frmRegistroCliente extends javax.swing.JFrame {
         fldNombre = new javax.swing.JTextField();
         fldApellido = new javax.swing.JTextField();
         fldFecha = new javax.swing.JTextField();
-        cmbCiudad = new javax.swing.JComboBox<>();
+        boxCiudades = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,8 +156,6 @@ public class frmRegistroCliente extends javax.swing.JFrame {
 
         fldFecha.setText("YYYY-MM-DD");
 
-        cmbCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,7 +182,7 @@ public class frmRegistroCliente extends javax.swing.JFrame {
                     .addComponent(fldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addComponent(fldApellido)
                     .addComponent(fldFecha)
-                    .addComponent(cmbCiudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(boxCiudades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(189, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,7 +211,7 @@ public class frmRegistroCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(cmbCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
@@ -218,7 +243,8 @@ public class frmRegistroCliente extends javax.swing.JFrame {
             String val4 = fldContraseña.getText();
             String dateAux = fldFecha.getText();
             Date val5 = getSQLDate(dateAux);
-            int val6 = 1;
+            int val6 = 1 + boxCiudades.getSelectedIndex();
+            
             validarClienteDTO clienteAV = new validarClienteDTO(val3, val4);
             registrarClienteDTO cliente = new registrarClienteDTO(val1, val2, val3, val4, val5, val6);
             if (validarCliente(clienteAV) != true){
@@ -237,9 +263,9 @@ public class frmRegistroCliente extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxCiudades;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JComboBox<String> cmbCiudad;
     private javax.swing.JTextField fldApellido;
     private javax.swing.JTextField fldContraseña;
     private javax.swing.JTextField fldCorreo;
