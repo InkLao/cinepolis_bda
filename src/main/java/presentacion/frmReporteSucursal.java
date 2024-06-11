@@ -103,6 +103,8 @@ public class frmReporteSucursal extends javax.swing.JFrame {
             document.close();
 
             System.out.println("¡Reporte generado con éxito!");
+            
+            JOptionPane.showMessageDialog(this, "Reporte generado con éxito!");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();    

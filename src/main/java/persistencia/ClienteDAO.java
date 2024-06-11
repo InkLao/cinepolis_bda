@@ -9,6 +9,7 @@ import dtos.validarClienteDTO;
 import entidad.ClienteEntidad;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -120,7 +121,7 @@ public class ClienteDAO implements IClienteDAO{
             List<ClienteEntidad> clienteLista = null;
 
             Connection conexion = this.conexionBD.crearConexion();
-            String codigoSQL = "Select idCliente,cl.nombre,apellido,contraseña,fecha_nacimiento,email,c.nombre as nc \n" +
+            String codigoSQL = "Select idCliente, cl.nombre,apellido,contraseña,fecha_nacimiento,email,c.nombre as nc \n" +
                             "from clientes cl\n" +
                             "left join ciudades c on cl.idCiudad = c.idCiudad;";
             PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
@@ -147,7 +148,7 @@ public class ClienteDAO implements IClienteDAO{
             int idCliente = resultado.getInt("idCliente");
             String nombre = resultado.getString("nombre");
             String apellido = resultado.getString("apellido");
-            LocalTime fn = resultado.getTime("fecha_nacimiento").toLocalTime();
+            Date fn = resultado.getDate("fecha_nacimiento");
             String contraseña = resultado.getString("contraseña");
             String email = resultado.getString("email");
             String nc = resultado.getString("nc");

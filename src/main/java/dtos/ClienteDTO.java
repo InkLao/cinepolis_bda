@@ -1,6 +1,7 @@
 package dtos;
 
 import entidad.*;
+import java.sql.Date;
 import java.time.LocalTime;
 
 /**
@@ -15,7 +16,7 @@ public class ClienteDTO {
     private String ciudad;
     private String contraseña;
     private String fechaNacimiento;
-    private LocalTime fechaNacimientoa;
+    private Date fechaNacimientoa;
 
     public ClienteDTO() {
     }
@@ -33,7 +34,7 @@ public class ClienteDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public ClienteDTO(int idCliente, String nombre, String apellido, LocalTime fn, String contraseña, String email, String nc) {
+    public ClienteDTO(int idCliente, String nombre, String apellido, Date fn, String contraseña, String email, String nc) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -91,11 +92,11 @@ public class ClienteDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public LocalTime getFechaNacimientoa() {
+    public Date getFechaNacimientoa() {
         return fechaNacimientoa;
     }
 
-    public void setFechaNacimientoa(LocalTime fechaNacimientoa) {
+    public void setFechaNacimientoa(Date fechaNacimientoa) {
         this.fechaNacimientoa = fechaNacimientoa;
     }
 

@@ -67,4 +67,17 @@ public class FuncionNegocio implements IFuncionNegocio{
         return funcionDTO;
     }    
     
+    @Override
+    public List<FuncionDTO> buscarFuncionesTablaT() throws NegocioException {
+         try {
+            List<FuncionEntidad> funciones = this.funcionDAO. buscarFuncionesTablaT();
+            return this.convertirFuncionesTablaDTO(funciones);
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }
+        
+    
 }

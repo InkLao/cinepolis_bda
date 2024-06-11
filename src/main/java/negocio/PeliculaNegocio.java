@@ -56,4 +56,17 @@ public class PeliculaNegocio implements IPeliculaNegocio{
         return peliculaDTO;
     }    
     
+    @Override
+    public List<PeliculaDTO> buscarPeliculaTablaT() throws NegocioException {
+         try {
+            List<PeliculaEntidad> peliculas = this.peliculaDAO. buscarPeliculasTablaT();
+            return this.convertirPeliculasTablaDTO(peliculas);
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }
+        
+    
 }

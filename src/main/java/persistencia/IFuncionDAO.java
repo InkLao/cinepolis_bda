@@ -18,7 +18,9 @@ public interface IFuncionDAO {
     
         public List<FuncionEntidad> buscarFuncionesTabla(String pelicula1, String nSala) throws PersistenciaException;
         
-            public FuncionEntidad convertirAEntidad(ResultSet resultado) throws SQLException;
+        public FuncionEntidad convertirAEntidad(ResultSet resultado) throws SQLException;
             
-            public int buscarIdFuncion(Timestamp fechahora, String nombre, String titulo) throws PersistenciaException ;
+        public int buscarIdFuncion(Timestamp fechahora, String nombre, String titulo) throws PersistenciaException ;
+        
+        public List<FuncionEntidad> buscarFuncionesTablaT() throws PersistenciaException;
 }

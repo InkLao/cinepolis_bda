@@ -97,5 +97,34 @@ public class funcionDAO implements IFuncionDAO{
         return new FuncionEntidad(titulo, duracion, disponibilidad, sala, costo, idFuncion);
     }    
     
+        @Override
+        public List<FuncionEntidad> buscarFuncionesTablaT() throws PersistenciaException {
+        try {
+            List<FuncionEntidad> sucursalLista = null;
+
+            Connection conexion = this.conexionBD.crearConexion();
+            String codigoSQL = "select p.titulo, f.fecha_hora, f.disponibilidad, s.nombre, p.costo, f.idFuncion from peliculas p\n" +
+                               "inner join funciones f on p.idPelicula = f.idPelicula\n" +
+                               "inner join salas s on s.idSala = f.idSala\n" +
+                               "inner join sucursales sa on s.idSucursal = sa.idSucursal\n" + 
+                                ";";
+            PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+
+            ResultSet resultado = preparedStatement.executeQuery();
+            while (resultado.next()) {
+                if (sucursalLista == null) {
+                    sucursalLista = new ArrayList<>();
+                }
+                FuncionEntidad funciones = this.convertirAEntidad(resultado);
+                sucursalLista.add(funciones);
+            }
+            conexion.close();
+            return sucursalLista;
+        } catch (SQLException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+        }
+    }    
     
 }

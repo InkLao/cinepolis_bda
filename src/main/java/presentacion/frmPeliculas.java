@@ -5,6 +5,7 @@
 package presentacion;
 
 import dtos.ClienteDTO;
+import dtos.PeliculaDTO;
 import entidad.ClienteEntidad;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ import persistencia.IClienteDAO;
  *
  * @author santi
  */
-public class frmClientes extends javax.swing.JFrame {
+public class frmPeliculas extends javax.swing.JFrame {
 
     /**
      * Creates new form frmClientes
@@ -35,7 +36,7 @@ public class frmClientes extends javax.swing.JFrame {
     IFuncionNegocio funcion;   
     IReporteNegocio reporte;
     
-    public frmClientes(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion, IReporteNegocio reporte) {
+    public frmPeliculas(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion, IReporteNegocio reporte) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
@@ -43,24 +44,24 @@ public class frmClientes extends javax.swing.JFrame {
         this.funcion = funcion;        
         this.reporte = reporte;        
         initComponents();
-        llenarTablaClientes(buscarClientesTabla());
+        llenarTablaClientes(buscarPeliculasTablaT());
     }
 
-    private List<ClienteDTO> buscarClientesTabla(){
-        List<ClienteDTO> clientesLista = null;
+    private List<PeliculaDTO> buscarPeliculasTablaT(){
+        List<PeliculaDTO> peliculasLista = null;
         try {
             
-            clientesLista = this.cliente.buscarClientesTabla();
+            peliculasLista = this.pelicula.buscarPeliculaTablaT();
 
 
         } catch (NegocioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
         }
 
-        return clientesLista;
+        return peliculasLista;
     }          
     
-    private void llenarTablaClientes(List<ClienteDTO> clientesLista) {
+    private void llenarTablaClientes(List<PeliculaDTO> peliculasLista) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblClientes.getModel();
 
         if (modeloTabla.getRowCount() > 0) {
@@ -69,16 +70,15 @@ public class frmClientes extends javax.swing.JFrame {
             }
         }
 
-        if (clientesLista != null) {
-            clientesLista.forEach(row -> {
+        if (peliculasLista != null) {
+            peliculasLista.forEach(row -> {
                 Object[] fila = new Object[7];
-                fila[0] = row.getIdCliente();
-                fila[1] = row.getNombre();
-                fila[2] = row.getApellido();
-                fila[3] = row.getContraseña();
-                fila[6] = row.getFechaNacimientoa();
-                fila[4] = row.getEmail();
-                fila[5] = row.getCiudad();
+                fila[0] = row.getTitulo();
+                fila[1] = row.getClasificacion();
+                fila[2] = row.getDuracion();
+                fila[3] = row.getSinopsis();
+                fila[4] = row.getTrailer();
+                fila[5] = row.getPais();
 
                 modeloTabla.addRow(fila);
             });
@@ -101,13 +101,13 @@ public class frmClientes extends javax.swing.JFrame {
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "idCliente", "Nombre", "Apellido", "Contraseña", "Correo", "Ciudad", "Fecha Nacimiento"
+                "Titulo", "Clasificación", "Duración", "Sinópsis", "Link_trailer", "País"
             }
         ));
         jScrollPane1.setViewportView(tblClientes);

@@ -5,6 +5,8 @@
 package presentacion;
 
 import dtos.ClienteDTO;
+import dtos.FuncionDTO;
+import dtos.PeliculaDTO;
 import entidad.ClienteEntidad;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,7 +25,7 @@ import persistencia.IClienteDAO;
  *
  * @author santi
  */
-public class frmClientes extends javax.swing.JFrame {
+public class frmFuncionesCatalogo extends javax.swing.JFrame {
 
     /**
      * Creates new form frmClientes
@@ -35,7 +37,7 @@ public class frmClientes extends javax.swing.JFrame {
     IFuncionNegocio funcion;   
     IReporteNegocio reporte;
     
-    public frmClientes(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion, IReporteNegocio reporte) {
+    public frmFuncionesCatalogo(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion, IReporteNegocio reporte) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
@@ -43,24 +45,24 @@ public class frmClientes extends javax.swing.JFrame {
         this.funcion = funcion;        
         this.reporte = reporte;        
         initComponents();
-        llenarTablaClientes(buscarClientesTabla());
+        llenarTablaFunciones(buscarFuncionesTablaT());
     }
 
-    private List<ClienteDTO> buscarClientesTabla(){
-        List<ClienteDTO> clientesLista = null;
+    private List<FuncionDTO> buscarFuncionesTablaT(){
+        List<FuncionDTO> funcionesLista = null;
         try {
             
-            clientesLista = this.cliente.buscarClientesTabla();
+            funcionesLista = this.funcion.buscarFuncionesTablaT();
 
 
         } catch (NegocioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
         }
 
-        return clientesLista;
+        return funcionesLista;
     }          
     
-    private void llenarTablaClientes(List<ClienteDTO> clientesLista) {
+    private void llenarTablaFunciones(List<FuncionDTO> funcionesLista) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblClientes.getModel();
 
         if (modeloTabla.getRowCount() > 0) {
@@ -69,16 +71,14 @@ public class frmClientes extends javax.swing.JFrame {
             }
         }
 
-        if (clientesLista != null) {
-            clientesLista.forEach(row -> {
+        if (funcionesLista != null) {
+            funcionesLista.forEach(row -> {
                 Object[] fila = new Object[7];
-                fila[0] = row.getIdCliente();
-                fila[1] = row.getNombre();
-                fila[2] = row.getApellido();
-                fila[3] = row.getContraseña();
-                fila[6] = row.getFechaNacimientoa();
-                fila[4] = row.getEmail();
-                fila[5] = row.getCiudad();
+                fila[0] = row.getTitulo();
+                fila[1] = row.getDuracion();
+                fila[2] = row.getSala();
+                fila[3] = row.getAsientosdisponibles();
+                
 
                 modeloTabla.addRow(fila);
             });
@@ -101,13 +101,13 @@ public class frmClientes extends javax.swing.JFrame {
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "idCliente", "Nombre", "Apellido", "Contraseña", "Correo", "Ciudad", "Fecha Nacimiento"
+                "Sala", "Película", "Fecha", "Asientos disponibles"
             }
         ));
         jScrollPane1.setViewportView(tblClientes);
