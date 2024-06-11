@@ -90,9 +90,9 @@ public class ClienteNegocio implements IClienteNegocio{
     }    
         
     
-    public void comprarBoleto(int id) throws NegocioException {
+    public void comprarBoleto(int id, int cant) throws NegocioException {
                 try {
-            this.clienteDAO.comprarBoleto(id);            
+            this.clienteDAO.comprarBoleto(id, cant);            
         } catch (PersistenciaException ex) {
             // hacer uso de Logger
             System.out.println(ex.getMessage());

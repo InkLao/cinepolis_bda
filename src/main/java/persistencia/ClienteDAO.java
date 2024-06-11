@@ -77,15 +77,10 @@ public class ClienteDAO implements IClienteDAO{
         Connection conexion = this.conexionBD.crearConexion();
         String codigoSQL = "CALL validarUsuario(?,?,?);";
             try (CallableStatement callableStatement = conexion.prepareCall(codigoSQL)) {
-                // Set the input parameter
                 callableStatement.setString(1, cliente.getEmail());
                 callableStatement.setString(2, cliente.getContraseña());
-                // Register the output parameters
                 callableStatement.registerOutParameter(3, java.sql.Types.BOOLEAN);
-
-                // Execute the stored procedure 
                 callableStatement.execute();
-
 
                 boolean validado = callableStatement.getBoolean(3);
                 return validado;
@@ -98,15 +93,19 @@ public class ClienteDAO implements IClienteDAO{
     }
 
         @Override
-        public void comprarBoleto(int id) throws PersistenciaException {
+        public void comprarBoleto(int id, int cant) throws PersistenciaException {
+            
         try {
 
             Connection conexion = this.conexionBD.crearConexion();
-            String codigoSQL = "insert into boletos (nombre, idFuncion) values ('Boleto', ?); ;";
-            PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
-            preparedStatement.setInt(1, id);
-            preparedStatement.execute();
-
+            String codigoSQL = "call insertarBoletos(?,?);";
+            try (CallableStatement callableStatement = conexion.prepareCall(codigoSQL)) {
+                // Set the input parameter
+                callableStatement.setInt(1, cant);
+                callableStatement.setInt(2, id);
+                callableStatement.execute();
+                // Register the output parameters
+            }
             conexion.close();
         } catch (SQLException ex) {
             // hacer uso de Logger

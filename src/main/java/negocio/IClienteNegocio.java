@@ -18,7 +18,7 @@ public interface IClienteNegocio {
     void registrarCliente(registrarClienteDTO cliente) throws NegocioException;
     public boolean validarCliente(validarClienteDTO cliente) throws NegocioException;
     public int buscarIdCliente(validarClienteDTO cliente) throws NegocioException;
-        public void comprarBoleto(int id) throws NegocioException ;
+        public void comprarBoleto(int id, int cant) throws NegocioException ;
         public List<ClienteDTO> buscarClientesTabla() throws NegocioException;
             public List<ClienteDTO> convertirClientesTablaDTO(List<ClienteEntidad> clientes) throws NegocioException ;
             

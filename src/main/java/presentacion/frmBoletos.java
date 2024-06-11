@@ -72,10 +72,11 @@ public class frmBoletos extends javax.swing.JFrame {
         
     }
 
-    private void comprarBoletos() throws NegocioException, PersistenciaException{
+    private void comprarBoletos() throws NegocioException {
         
-        
-        this.cliente.comprarBoleto(row.getIdFuncion());
+        int cant = 1 + boxCantidad.getSelectedIndex();
+
+        this.cliente.comprarBoleto(row.getIdFuncion(), cant);
     }
     
     /**
@@ -91,7 +92,7 @@ public class frmBoletos extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBoleto = new javax.swing.JTable();
-        fldTotal = new javax.swing.JTextField();
+        boxCantidad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,7 +123,7 @@ public class frmBoletos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblBoleto);
 
-        fldTotal.setEditable(false);
+        boxCantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Boleto", "2 Boletos", "3 Boletos", "4 Boletos", "5 Boletos", "6 Boletos", "7 Boletos", "8 Boletos", "9 Boletos", "10 Boletos" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,9 +134,9 @@ public class frmBoletos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnAtras)
+                        .addGap(220, 220, 220)
+                        .addComponent(boxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(137, 137, 137)
                         .addComponent(btnComprar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 16, Short.MAX_VALUE)
@@ -151,7 +152,7 @@ public class frmBoletos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
                     .addComponent(btnComprar)
-                    .addComponent(fldTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -177,28 +178,29 @@ public class frmBoletos extends javax.swing.JFrame {
         IPeliculaNegocio pelicula = this.pelicula;
         IClienteNegocio cliente =this.cliente;
         IFuncionNegocio funcion = this.funcion;
-
         
+
+
          try {
              comprarBoletos();
-             JOptionPane.showMessageDialog(this, "Boleto comprado correctamente!");
-         frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion);
+        JOptionPane.showMessageDialog(this, "Boleto comprado correctamente!");
+        frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion);
         x.setVisible(true);
         setVisible(false);
          } catch (NegocioException ex) {
              Logger.getLogger(frmBoletos.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (PersistenciaException ex) {
-             Logger.getLogger(frmBoletos.class.getName()).log(Level.SEVERE, null, ex);
          }
+        
+        
 
       
     }//GEN-LAST:event_btnComprarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxCantidad;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnComprar;
-    private javax.swing.JTextField fldTotal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblBoleto;
     // End of variables declaration//GEN-END:variables

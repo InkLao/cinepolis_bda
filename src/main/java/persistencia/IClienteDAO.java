@@ -24,7 +24,7 @@ public interface IClienteDAO {
     
     public int buscarIdCliente(validarClienteDTO cliente) throws PersistenciaException;
     
-    public void comprarBoleto(int id) throws PersistenciaException;
+    public void comprarBoleto(int id, int cant) throws PersistenciaException;
     
     public List<ClienteEntidad> buscarClientesTabla() throws PersistenciaException;
 
