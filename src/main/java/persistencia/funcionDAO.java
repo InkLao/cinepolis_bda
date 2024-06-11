@@ -30,7 +30,7 @@ public class funcionDAO implements IFuncionDAO{
     
     
         @Override
-        public List<FuncionEntidad> buscarFuncionesTabla(String pelicula1) throws PersistenciaException {
+        public List<FuncionEntidad> buscarFuncionesTabla(String pelicula1, String nSucursal) throws PersistenciaException {
         try {
             List<FuncionEntidad> sucursalLista = null;
 
@@ -38,9 +38,11 @@ public class funcionDAO implements IFuncionDAO{
             String codigoSQL = "select p.titulo, f.fecha_hora, f.disponibilidad, s.nombre, p.costo, f.idFuncion from peliculas p\n" +
                                "inner join funciones f on p.idPelicula = f.idPelicula\n" +
                                "inner join salas s on s.idSala = f.idSala\n" +
-                               "where ? = p.titulo;";
+                               "inner join sucursales sa on s.idSucursal = sa.idSucursal\n" + 
+                                "where ? = p.titulo and ? = sa.nombre;";
             PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
             preparedStatement.setString(1, pelicula1);
+            preparedStatement.setString(2, nSucursal);
             ResultSet resultado = preparedStatement.executeQuery();
             while (resultado.next()) {
                 if (sucursalLista == null) {

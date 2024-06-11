@@ -25,9 +25,9 @@ public class FuncionNegocio implements IFuncionNegocio{
     }
     
     @Override
-    public List<FuncionDTO> buscarFuncionesTabla(String pelicula1) throws NegocioException {
+    public List<FuncionDTO> buscarFuncionesTabla(String pelicula1, String nSala) throws NegocioException {
          try {
-            List<FuncionEntidad> funciones = this.funcionDAO. buscarFuncionesTabla(pelicula1);
+            List<FuncionEntidad> funciones = this.funcionDAO. buscarFuncionesTabla(pelicula1, nSala);
             return this.convertirFuncionesTablaDTO(funciones);
         } catch (PersistenciaException ex) {
             // hacer uso de Logger

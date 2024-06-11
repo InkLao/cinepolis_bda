@@ -87,8 +87,9 @@ public class frmCartelera extends javax.swing.JFrame {
         IFuncionNegocio funcion = this.funcion;
         
         String pelicula1 = (String) tblPelicula.getValueAt(tblPelicula.getSelectedRow(), 0);
+        String nSala = (String )boxSucursal.getSelectedItem();
         
-        frmFunciones x = new frmFunciones(cliente, ciudad, sucursal, pelicula, funcion, pelicula1);
+        frmFunciones x = new frmFunciones(cliente, ciudad, sucursal, pelicula, funcion, pelicula1, nSala);
         x.setVisible(true);
         setVisible(false);        
                 

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IFuncionNegocio {
 
-    public List<FuncionDTO> buscarFuncionesTabla(String pelicula1) throws NegocioException ;
+    public List<FuncionDTO> buscarFuncionesTabla(String pelicula1, String nSala) throws NegocioException ;
     public List<FuncionDTO> convertirFuncionesTablaDTO(List<FuncionEntidad> funciones) throws NegocioException ;    
     public int buscarIdFuncion (Timestamp fechahora, String nombre, String titulo) throws NegocioException;     
 }

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface IFuncionDAO {
     
-        public List<FuncionEntidad> buscarFuncionesTabla(String pelicula1) throws PersistenciaException;
+        public List<FuncionEntidad> buscarFuncionesTabla(String pelicula1, String nSala) throws PersistenciaException;
         
             public FuncionEntidad convertirAEntidad(ResultSet resultado) throws SQLException;
             

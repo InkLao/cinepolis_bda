@@ -39,19 +39,21 @@ public class frmFunciones extends javax.swing.JFrame {
      IClienteDAO cliente = this.cliente;
      IFuncionNegocio funcion = this.funcion;
      String pelicula1 = null;
+     String nSala = null;
     /**
      * Creates new form frmLogin
      */
-    public frmFunciones(IClienteDAO cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio, String pelicula) {
+    public frmFunciones(IClienteDAO cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio, String pelicula, String nSala) {
         this.cliente = cliente;
         this.ciudad = ciudadNegocio;
         this.sucursal = sucursalNegocio;
         this.pelicula = peliculaNegocio;        
         this.funcion = funcionNegocio;      
         this.pelicula1 = pelicula;
+        this.nSala = nSala;
         initComponents();
         cargarConfiguracionInicialTablaFunciones();
-        llenarTablaPeliculas(buscarFuncionesTabla(pelicula));
+        llenarTablaPeliculas(buscarFuncionesTabla(pelicula, nSala));
     }
 
     private void cargarConfiguracionInicialTablaFunciones() { 
@@ -61,7 +63,7 @@ public class frmFunciones extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-               comprarBoleto(buscarFuncionesTabla(pelicula1)); 
+               comprarBoleto(buscarFuncionesTabla(pelicula1, nSala)); 
                 
             }               
         };
@@ -72,11 +74,11 @@ public class frmFunciones extends javax.swing.JFrame {
     }    
     
     
-    private List<FuncionDTO> buscarFuncionesTabla(String pelicula) {
+    private List<FuncionDTO> buscarFuncionesTabla(String pelicula, String nSala) {
         List<FuncionDTO> funcionLista = null;
         try {
             
-            funcionLista = this.funcion.buscarFuncionesTabla(pelicula);
+            funcionLista = this.funcion.buscarFuncionesTabla(pelicula, nSala);
 
 
         } catch (NegocioException ex) {
@@ -110,11 +112,6 @@ public class frmFunciones extends javax.swing.JFrame {
     }
     
         
-    private int buscarIdFuncion(Timestamp date, String nombre, String titulo) throws NegocioException{
-
-        int idFuncion;
-        return idFuncion = funcion.buscarIdFuncion(date, nombre, titulo);
-    }
              
        
     private void comprarBoleto(List<FuncionDTO> funcionesLista) {
@@ -124,7 +121,6 @@ public class frmFunciones extends javax.swing.JFrame {
         ISucursalNegocio sucursals = this.sucursal;
         IPeliculaNegocio peliculas = this.pelicula;
         IFuncionNegocio funcions = this.funcion;
-        int idFuncion;
         int i = this.tblFuncion.getSelectedRow();
         FuncionDTO fila = funcionesLista.get(i);
         //idFuncion = buscarIdFuncion(fila.getDuracion(), fila.getSala(), fila.getTitulo());
