@@ -171,9 +171,19 @@ public class frmBoletos extends javax.swing.JFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
 
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IClienteDAO cliente =this.cliente;
+        IFuncionNegocio funcion = this.funcion;
 
+        
          try {
              comprarBoletos();
+             JOptionPane.showMessageDialog(this, "Boleto comprado correctamente!");
+         frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion);
+        x.setVisible(true);
+        setVisible(false);
          } catch (NegocioException ex) {
              Logger.getLogger(frmBoletos.class.getName()).log(Level.SEVERE, null, ex);
          } catch (PersistenciaException ex) {

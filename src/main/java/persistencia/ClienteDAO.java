@@ -102,7 +102,7 @@ public class ClienteDAO implements IClienteDAO{
         try {
 
             Connection conexion = this.conexionBD.crearConexion();
-            String codigoSQL = "insert into boletos (nombre, idFuncion) values ('Boleto', ?)";
+            String codigoSQL = "insert into boletos (nombre, idFuncion) values ('Boleto', ?); ;";
             PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
