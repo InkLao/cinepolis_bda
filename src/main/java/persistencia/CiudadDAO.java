@@ -50,6 +50,8 @@ public class CiudadDAO implements ICiudadDAO{
         }
     }
 
+        
+        
     @Override
     public CiudadEntidad convertirAEntidad(ResultSet resultado) throws SQLException {
         int idCiudad = resultado.getInt("idCiudad");

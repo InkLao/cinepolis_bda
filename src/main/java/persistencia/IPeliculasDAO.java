@@ -17,4 +17,5 @@ public interface IPeliculasDAO {
     
     public PeliculaEntidad convertirAEntidad(ResultSet resultado) throws SQLException ;
     public List<PeliculaEntidad> buscarPeliculasTabla(int idSucursal) throws PersistenciaException ;    
+    public List<PeliculaEntidad> buscarPeliculasTablaT() throws PersistenciaException ;    
 }

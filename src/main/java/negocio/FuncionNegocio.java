@@ -6,6 +6,7 @@ package negocio;
 
 import dtos.FuncionDTO;
 import entidad.FuncionEntidad;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import persistencia.IFuncionDAO;
@@ -24,10 +25,22 @@ public class FuncionNegocio implements IFuncionNegocio{
     }
     
     @Override
-    public List<FuncionDTO> buscarFuncionesTabla(String pelicula1) throws NegocioException {
+    public List<FuncionDTO> buscarFuncionesTabla(String pelicula1, String nSala) throws NegocioException {
          try {
-            List<FuncionEntidad> funciones = this.funcionDAO. buscarFuncionesTabla(pelicula1);
+            List<FuncionEntidad> funciones = this.funcionDAO. buscarFuncionesTabla(pelicula1, nSala);
             return this.convertirFuncionesTablaDTO(funciones);
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }
+    
+    public int buscarIdFuncion (Timestamp fechahora, String nombre, String titulo) throws NegocioException {
+      
+        try {
+            int idFuncion = this.funcionDAO.buscarIdFuncion(fechahora, nombre, titulo);
+            return idFuncion;
         } catch (PersistenciaException ex) {
             // hacer uso de Logger
             System.out.println(ex.getMessage());
@@ -48,9 +61,23 @@ public class FuncionNegocio implements IFuncionNegocio{
             dto.setAsientosdisponibles(funcion.getAsientosdisponibles());
             dto.setSala(funcion.getSala());
             dto.setPrecio(funcion.getPrecio());
+            dto.setIdFuncion(funcion.getIdFuncion());
             funcionDTO.add(dto);
         }
         return funcionDTO;
     }    
+    
+    @Override
+    public List<FuncionDTO> buscarFuncionesTablaT() throws NegocioException {
+         try {
+            List<FuncionEntidad> funciones = this.funcionDAO. buscarFuncionesTablaT();
+            return this.convertirFuncionesTablaDTO(funciones);
+        } catch (PersistenciaException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }
+        
     
 }

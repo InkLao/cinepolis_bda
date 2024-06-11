@@ -5,8 +5,10 @@
 package presentacion;
 
 import negocio.ICiudadNegocio;
+import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
+import negocio.IReporteNegocio;
 import negocio.ISucursalNegocio;
 import persistencia.IClienteDAO;
 
@@ -16,20 +18,22 @@ import persistencia.IClienteDAO;
  */
 public class frmLogin extends javax.swing.JFrame {
 
-    private IClienteDAO cliente;
+    private IClienteNegocio cliente;
     private ICiudadNegocio ciudad;
     private ISucursalNegocio sucursal;
     private IPeliculaNegocio pelicula;
     private IFuncionNegocio funcion;
+    private IReporteNegocio reporte;
     /**
      * Creates new form frmLogin
      */
-    public frmLogin(IClienteDAO cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion) {
+    public frmLogin(IClienteNegocio cliente, ICiudadNegocio ciudad, ISucursalNegocio sucursal, IPeliculaNegocio pelicula, IFuncionNegocio funcion, IReporteNegocio reporte) {
         this.cliente = cliente;
         this.ciudad = ciudad;
         this.sucursal = sucursal;
         this.pelicula = pelicula;
         this.funcion = funcion;
+        this.reporte = reporte;
         initComponents();
     }
 
@@ -45,6 +49,11 @@ public class frmLogin extends javax.swing.JFrame {
         btnIniciarSesión = new javax.swing.JButton();
         btnRegistro = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnClientes = new javax.swing.JButton();
+        btnRSucursales = new javax.swing.JButton();
+        btnRPeliculas = new javax.swing.JButton();
+        btnPeliculas = new javax.swing.JButton();
+        btnClientes1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,35 +72,85 @@ public class frmLogin extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cinépolis");
+
+        btnClientes.setText("Catálogo Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+
+        btnRSucursales.setText("Reporte Sucursales");
+        btnRSucursales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRSucursalesActionPerformed(evt);
+            }
+        });
+
+        btnRPeliculas.setText("Reporte Películas");
+        btnRPeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRPeliculasActionPerformed(evt);
+            }
+        });
+
+        btnPeliculas.setText("Catálogo Películas");
+        btnPeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPeliculasActionPerformed(evt);
+            }
+        });
+
+        btnClientes1.setText("Catálogo Funciones");
+        btnClientes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientes1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(btnRegistro))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(btnIniciarSesión))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel1)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnIniciarSesión, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRSucursales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRPeliculas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnPeliculas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnClientes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap()
+                .addComponent(btnPeliculas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnClientes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnClientes1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addComponent(btnIniciarSesión)
-                .addGap(18, 18, 18)
-                .addComponent(btnRegistro)
-                .addGap(30, 30, 30))
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIniciarSesión)
+                    .addComponent(btnRSucursales))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistro)
+                    .addComponent(btnRPeliculas))
+                .addContainerGap())
         );
 
         pack();
@@ -99,33 +158,109 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnIniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesiónActionPerformed
         // TODO add your handling code here:
-        IClienteDAO cliente = this.cliente;
+        IClienteNegocio cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
         IFuncionNegocio funcion = this.funcion;
+        IReporteNegocio reporte = this.reporte;
         
-        frmIniciarSesion x = new frmIniciarSesion(cliente, ciudad, sucursal, pelicula, funcion);
+        frmIniciarSesion x = new frmIniciarSesion(cliente, ciudad, sucursal, pelicula, funcion, reporte);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnIniciarSesiónActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // TODO add your handling code here:
-        IClienteDAO cliente = this.cliente;
+        IClienteNegocio cliente = this.cliente;
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
         IFuncionNegocio funcion = this.funcion;
+        IReporteNegocio reporte = this.reporte;
         
-        frmRegistroCliente x = new frmRegistroCliente(cliente, ciudad, sucursal, pelicula, funcion);
+        frmRegistroCliente x = new frmRegistroCliente(cliente, ciudad, sucursal, pelicula, funcion, reporte);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnRegistroActionPerformed
 
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        // TODO add your handling code here:
+        IClienteNegocio cliente = this.cliente;
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        IReporteNegocio reporte = this.reporte;
+        
+        frmClientes x = new frmClientes(cliente, ciudad, sucursal, pelicula, funcion, reporte);
+        x.setVisible(true);
+        setVisible(false);        
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnRPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRPeliculasActionPerformed
+        IClienteNegocio cliente = this.cliente;
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        IReporteNegocio reporte = this.reporte;
+        
+        frmReportePelicula x = new frmReportePelicula(cliente, ciudad, sucursal, pelicula, funcion, reporte);
+        x.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnRPeliculasActionPerformed
+
+    private void btnRSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRSucursalesActionPerformed
+        // TODO add your handling code here:
+        IClienteNegocio cliente = this.cliente;
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        IReporteNegocio reporte = this.reporte;
+        
+        frmReporteSucursal x = new frmReporteSucursal(cliente, ciudad, sucursal, pelicula, funcion, reporte);
+        x.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnRSucursalesActionPerformed
+
+    private void btnPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeliculasActionPerformed
+        // TODO add your handling code here:
+        IClienteNegocio cliente = this.cliente;
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        IReporteNegocio reporte = this.reporte;
+        
+        frmPeliculas x = new frmPeliculas(cliente, ciudad, sucursal, pelicula, funcion, reporte);
+        x.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnPeliculasActionPerformed
+
+    private void btnClientes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientes1ActionPerformed
+        // TODO add your handling code here:
+        IClienteNegocio cliente = this.cliente;
+        ICiudadNegocio ciudad = this.ciudad;
+        ISucursalNegocio sucursal = this.sucursal;
+        IPeliculaNegocio pelicula = this.pelicula;
+        IFuncionNegocio funcion = this.funcion;
+        IReporteNegocio reporte = this.reporte;
+        
+        frmFuncionesCatalogo x = new frmFuncionesCatalogo(cliente, ciudad, sucursal, pelicula, funcion, reporte);
+        x.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_btnClientes1ActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnClientes1;
     private javax.swing.JButton btnIniciarSesión;
+    private javax.swing.JButton btnPeliculas;
+    private javax.swing.JButton btnRPeliculas;
+    private javax.swing.JButton btnRSucursales;
     private javax.swing.JButton btnRegistro;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

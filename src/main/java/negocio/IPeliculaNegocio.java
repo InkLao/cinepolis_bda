@@ -16,4 +16,5 @@ public interface IPeliculaNegocio {
 
         public List<PeliculaDTO> buscarPeliculaTabla(int idSucursal) throws NegocioException;
         public List<PeliculaDTO> convertirPeliculasTablaDTO(List<PeliculaEntidad> peliculas) throws NegocioException;
+            public List<PeliculaDTO> buscarPeliculaTablaT() throws NegocioException ;
 }

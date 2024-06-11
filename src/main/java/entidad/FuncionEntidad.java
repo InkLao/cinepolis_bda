@@ -12,18 +12,20 @@ import java.sql.Timestamp;
  */
 public class FuncionEntidad {
     
+    private int idFuncion;
     private String titulo;
     private Timestamp duracion;
     private int asientosdisponibles;
     private String sala;
     private int precio;  
     
-    public FuncionEntidad (String titulo, Timestamp duracion, int asientosdisponibles, String sala, int precio) {
+    public FuncionEntidad (String titulo, Timestamp duracion, int asientosdisponibles, String sala, int precio, int idFuncion) {
     this.titulo = titulo;
     this.duracion = duracion;
     this.asientosdisponibles = asientosdisponibles;
     this.sala = sala;
     this.precio = precio;
+    this.idFuncion = idFuncion;
     }
 
     public String getTitulo() {
@@ -65,6 +67,16 @@ public class FuncionEntidad {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
+
+    public int getIdFuncion() {
+        return idFuncion;
+    }
+
+    public void setIdFuncion(int idFuncion) {
+        this.idFuncion = idFuncion;
+    }
+    
+    
     
     
 }

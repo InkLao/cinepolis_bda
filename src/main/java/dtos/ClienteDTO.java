@@ -1,5 +1,6 @@
-package entidad;
+package dtos;
 
+import entidad.*;
 import java.sql.Date;
 import java.time.LocalTime;
 
@@ -7,7 +8,7 @@ import java.time.LocalTime;
  *
  * @author eduar
  */
-public class ClienteEntidad {
+public class ClienteDTO {
     private int idCliente;
     private String nombre;
     private String apellido;
@@ -17,10 +18,10 @@ public class ClienteEntidad {
     private String fechaNacimiento;
     private Date fechaNacimientoa;
 
-    public ClienteEntidad() {
+    public ClienteDTO() {
     }
 
-    public ClienteEntidad(
+    public ClienteDTO(
             String nombre, 
             String apellido, 
             String email, 
@@ -33,7 +34,7 @@ public class ClienteEntidad {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public ClienteEntidad(int idCliente, String nombre, String apellido, Date fn, String contraseña, String email, String nc) {
+    public ClienteDTO(int idCliente, String nombre, String apellido, Date fn, String contraseña, String email, String nc) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -106,6 +107,8 @@ public class ClienteEntidad {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+    
+    
     
     @Override
     public String toString() {

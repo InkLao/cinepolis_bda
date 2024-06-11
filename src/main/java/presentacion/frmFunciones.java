@@ -5,19 +5,17 @@
 package presentacion;
 
 import dtos.FuncionDTO;
-import dtos.PeliculaDTO;
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import negocio.ICiudadNegocio;
+import negocio.IClienteNegocio;
 import negocio.IFuncionNegocio;
 import negocio.IPeliculaNegocio;
+import negocio.IReporteNegocio;
 import negocio.ISucursalNegocio;
 import negocio.NegocioException;
 import persistencia.IClienteDAO;
@@ -33,22 +31,26 @@ public class frmFunciones extends javax.swing.JFrame {
      ICiudadNegocio ciudad = this.ciudad;
      ISucursalNegocio sucursal = this.sucursal;
      IPeliculaNegocio pelicula = this.pelicula;
-     IClienteDAO cliente = this.cliente;
+     IClienteNegocio cliente = this.cliente;
      IFuncionNegocio funcion = this.funcion;
+     IReporteNegocio reporte = this.reporte;
      String pelicula1 = null;
+     String nSala = null;
     /**
      * Creates new form frmLogin
      */
-    public frmFunciones(IClienteDAO cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio, String pelicula) {
+    public frmFunciones(IClienteNegocio cliente, ICiudadNegocio ciudadNegocio, ISucursalNegocio sucursalNegocio, IPeliculaNegocio peliculaNegocio, IFuncionNegocio funcionNegocio,IReporteNegocio reporte, String pelicula, String nSala) {
         this.cliente = cliente;
         this.ciudad = ciudadNegocio;
         this.sucursal = sucursalNegocio;
         this.pelicula = peliculaNegocio;        
         this.funcion = funcionNegocio;      
+        this.reporte = reporte;      
         this.pelicula1 = pelicula;
+        this.nSala = nSala;
         initComponents();
         cargarConfiguracionInicialTablaFunciones();
-        llenarTablaPeliculas(buscarFuncionesTabla(pelicula));
+        llenarTablaPeliculas(buscarFuncionesTabla(pelicula, nSala));
     }
 
     private void cargarConfiguracionInicialTablaFunciones() { 
@@ -58,7 +60,7 @@ public class frmFunciones extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-               comprarBoleto(buscarFuncionesTabla(pelicula1)); 
+               comprarBoleto(buscarFuncionesTabla(pelicula1, nSala)); 
                 
             }               
         };
@@ -69,11 +71,11 @@ public class frmFunciones extends javax.swing.JFrame {
     }    
     
     
-    private List<FuncionDTO> buscarFuncionesTabla(String pelicula) {
+    private List<FuncionDTO> buscarFuncionesTabla(String pelicula, String nSala) {
         List<FuncionDTO> funcionLista = null;
         try {
             
-            funcionLista = this.funcion.buscarFuncionesTabla(pelicula);
+            funcionLista = this.funcion.buscarFuncionesTabla(pelicula, nSala);
 
 
         } catch (NegocioException ex) {
@@ -105,26 +107,24 @@ public class frmFunciones extends javax.swing.JFrame {
             });
         }
     }
+    
+        
+             
        
-    private void comprarBoleto(List<FuncionDTO> funcionesLista){
+    private void comprarBoleto(List<FuncionDTO> funcionesLista) {
                     
-        IClienteDAO cliente = this.cliente;        
-        ICiudadNegocio ciudad = this.ciudad;
-        ISucursalNegocio sucursal = this.sucursal;
-        IPeliculaNegocio pelicula = this.pelicula;
-        IFuncionNegocio funcion = this.funcion;
-        
-     
-
-  
+        IClienteNegocio clientes = this.cliente;
+        ICiudadNegocio ciudads = this.ciudad;
+        ISucursalNegocio sucursals = this.sucursal;
+        IPeliculaNegocio peliculas = this.pelicula;
+        IFuncionNegocio funcions = this.funcion;
+        IReporteNegocio reporte = this.reporte;
         int i = this.tblFuncion.getSelectedRow();
-
         FuncionDTO fila = funcionesLista.get(i);
-        
-        
-        frmBoletos x = new frmBoletos(cliente, ciudad, sucursal, pelicula, funcion, fila);
+        //idFuncion = buscarIdFuncion(fila.getDuracion(), fila.getSala(), fila.getTitulo());
+        frmBoletos x = new frmBoletos(clientes, ciudads, sucursals, peliculas, funcions,  reporte,fila);
         x.setVisible(true);
-        setVisible(false);     
+        setVisible(false);
      
                 
         
@@ -143,6 +143,7 @@ public class frmFunciones extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFuncion = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,32 +169,33 @@ public class frmFunciones extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblFuncion);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Funciones");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnAtras))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(622, 622, 622)
-                                .addComponent(btnGuardar)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addContainerGap()
+                        .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtras)
                     .addComponent(btnGuardar))
@@ -208,9 +210,10 @@ public class frmFunciones extends javax.swing.JFrame {
         ICiudadNegocio ciudad = this.ciudad;
         ISucursalNegocio sucursal = this.sucursal;
         IPeliculaNegocio pelicula = this.pelicula;
-        IClienteDAO cliente =this.cliente;
+        IClienteNegocio cliente =this.cliente;
         IFuncionNegocio funcion = this.funcion;
-        frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion);
+        IReporteNegocio reporte = this.reporte;
+        frmCartelera x = new frmCartelera(cliente, ciudad, sucursal, pelicula, funcion, reporte);
         x.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
@@ -219,6 +222,7 @@ public class frmFunciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblFuncion;
     // End of variables declaration//GEN-END:variables
