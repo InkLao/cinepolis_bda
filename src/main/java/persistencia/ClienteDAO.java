@@ -36,6 +36,7 @@ public class ClienteDAO implements IClienteDAO{
         try{
                         
             Connection conexion = this.conexionBD.crearConexion();
+            conexion.setAutoCommit(false);
             String codigoSQL = "insert into clientes (nombre,apellido,email, contraseña, fecha_nacimiento, idCiudad) values (?,?,?,?,?,?); ";
             PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
             preparedStatement.setString(1, cliente.getNombre());
